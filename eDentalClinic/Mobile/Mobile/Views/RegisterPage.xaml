@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:Mobile.ViewModels"
+             x:Class="Mobile.Views.RegisterPage">
+    <ContentPage.BindingContext>
+        <vm:RegisterViewModel></vm:RegisterViewModel>
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <StackLayout Padding="50,0,50,0">
+            <Label FontSize="Large" HorizontalOptions="Center" Text="Register"></Label>
+            
+            <Label Text="First name:"></Label>
+            <Entry
+                   Text="{Binding FirstName}"/>
+
+            <Label Text="Last name:"></Label>
+            <Entry
+                   Text="{Binding LastName}"/>
+
+            <Label Text="Phone:"></Label>
+            <Entry 
+                   Text="{Binding Phone}"/>
+
+            <Label Text="Email:"></Label>
+            <Entry
+                   Text="{Binding Email}"/>
+
+            <Label Text="Address:"></Label>
+            <Entry
+                   Text="{Binding Address}"/>
+                        
+            <Label Text="Birth date:"></Label>
+            <DatePicker Date="{Binding Birthdate}">
+                <DatePicker.Format>yyyy-MM-dd</DatePicker.Format>
+            </DatePicker>
+            
+            <Label Text="City:"></Label>
+            <Picker ItemsSource="{Binding Cities}" SelectedItem="{Binding SelectedCity}" ItemDisplayBinding="{Binding Name}"></Picker>
+            
+            <Label Text="Gender:"></Label>
+            <Picker ItemsSource="{Binding Genders}" SelectedItem="{Binding SelectedGender}" ItemDisplayBinding="{Binding Type}"></Picker>
+
+            <Label Text="Username:"></Label>
+            <Entry
+                   Text="{Binding Username}"/>
+
+            <Label Text="Password:"></Label>
+            <Entry
+                   IsPassword="True"
+                   Text="{Binding Password}"/>
+
+            <Label Text="Confirm password:"></Label>
+            <Entry Placeholder="Confirm password"
+                   IsPassword="True"
+                   Text="{Binding PasswordConfirm}"/>
+            <StackLayout Orientation="Horizontal" Spacing="2">
+                <Button HorizontalOptions="CenterAndExpand" BackgroundColor="DodgerBlue" Text="Register" TextColor="White" Command="{Binding RegisterCommand}"></Button>
+                <Button HorizontalOptions="CenterAndExpand" BackgroundColor="DarkOrange"   Text="Back to login" TextColor="White" Clicked="Button_Clicked"/>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

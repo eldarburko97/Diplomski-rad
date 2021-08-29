@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:Mobile.ViewModels"
+             x:Class="Mobile.Views.RatingPage">
+    <ContentPage.BindingContext>
+        <vm:RatingViewModel></vm:RatingViewModel>
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <StackLayout Padding="50">
+
+            <Label FontSize="Large" HorizontalOptions="Center" Text="Please leave a rating for dentist!"></Label>
+
+            <Label Text="Dentist:"></Label>
+            <Entry Text="{Binding dentist}" IsReadOnly="True" BackgroundColor="LightGray"></Entry>
+          
+            <Label Text="Treatment:"></Label>
+            <Entry Text="{Binding TreatmentName }" IsReadOnly="True" BackgroundColor="LightGray"></Entry>
+
+            <Label Text="Appointment date:"></Label>
+            <Entry Text="{Binding AppointmentDate }" IsReadOnly="True" BackgroundColor="LightGray"></Entry>
+
+            <Label Text="Rating date:"></Label>
+            <DatePicker Date="{Binding RatingDate}" IsEnabled="False"></DatePicker>
+
+            <Label Text="Rating value (1-10):"></Label>
+            <Entry MaxLength="10" Text="{Binding Grade}"></Entry>
+
+            <Label Text="Comment:"></Label>
+            <Entry  HeightRequest="100" Text="{Binding Comment }"></Entry>
+
+            <Button Command="{Binding RatingCommand}" Text="Save rating" Font="17" BackgroundColor="DodgerBlue" TextColor="White"></Button>
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,115 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:Mobile.ViewModels"
+             xmlns:converters="clr-namespace:Mobile.Converters"
+             x:Class="Mobile.Views.BookingAppointmentPage">
+    <ContentPage.BindingContext>
+        <vm:BookingAppointmentViewModel></vm:BookingAppointmentViewModel>
+    </ContentPage.BindingContext>
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:ImageConverter x:Key="imgConv"></converters:ImageConverter>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout Padding="50">
+
+                <Label FontSize="Large" HorizontalOptions="Center" Text="Book an appointment"></Label>
+
+                <Label Text="First name:"></Label>
+                <Entry Text="{Binding FirstName}" IsReadOnly="True" BackgroundColor="LightGray"></Entry>
+
+                <Label Text="Last name:"></Label>
+                <Entry Text="{Binding LastName}" IsReadOnly="True" BackgroundColor="LightGray"></Entry>
+
+                <Label Text="Phone:"></Label>
+                <Entry Text="{Binding Phone}" IsReadOnly="True" BackgroundColor="LightGray"></Entry>
+
+                <Label Text="Email:"></Label>
+                <Entry Text="{Binding Email}" IsReadOnly="True" BackgroundColor="LightGray"></Entry>
+
+                <Label Text="Treatment:"></Label>
+                <Entry Text="{Binding TreatmentName}" IsReadOnly="True" BackgroundColor="LightGray"></Entry>
+
+                <Label Text="Dentist:"></Label>
+                <Entry Text="{Binding Dentist}" IsReadOnly="True" BackgroundColor="LightGray"></Entry>
+
+                <Label Text="Average dentist rating:"></Label>
+                <Entry Text="{Binding AverageRating}" IsReadOnly="True" BackgroundColor="LightGray"></Entry>
+
+                <Label Text="Date of appointment:"></Label>
+                <DatePicker Date="{Binding StartDate}"></DatePicker>
+
+                <TimePicker Time="{Binding Time}" Format="hh:mm"></TimePicker>
+
+
+                <Button Margin="0,30,0,0" Command="{Binding BookingCommand}" Text="Book an appointment" Font="17" BackgroundColor="DodgerBlue" TextColor="White"></Button>
+
+                <Label Margin="0,15,0,0" FontSize="15" Text="Dentists with similar ratings"></Label>
+
+                <ListView HeightRequest="200" ItemsSource="{Binding RecommendedDentistList}" BackgroundColor="LightSalmon" ItemTapped="ListView_ItemTapped" >
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <StackLayout>
+                                <Grid Padding="10" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" ColumnSpacing="0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition></ColumnDefinition>
+                                        <ColumnDefinition></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+                                    <StackLayout Grid.Column="0">
+                                        <Image  WidthRequest="200" HeightRequest="150" Source="{Binding Image,Converter={StaticResource imgConv}}"></Image>
+                                    </StackLayout>
+
+                                    <StackLayout Grid.Column="1" Padding="20">
+                                        <Label FontAttributes="Bold">
+                                            <Label.FormattedText>
+                                                <FormattedString>
+                                                    <Span Text="First name: "/>
+                                                    <Span Text="{Binding FirstName}"></Span>
+                                                </FormattedString>
+                                            </Label.FormattedText>
+                                        </Label>
+
+                                        <Label FontAttributes="Bold">
+                                            <Label.FormattedText>
+                                                <FormattedString>
+                                                    <Span Text="Last name: "/>
+                                                    <Span Text="{Binding LastName}"></Span>
+                                                </FormattedString>
+                                            </Label.FormattedText>
+                                        </Label>
+
+                                        <Label FontAttributes="Bold">
+                                            <Label.FormattedText>
+                                                <FormattedString>
+                                                    <Span Text="Title: "/>
+                                                    <Span Text="{Binding Branch.Title}"></Span>
+                                                </FormattedString>
+                                            </Label.FormattedText>
+                                        </Label>
+
+                                        <Label FontAttributes="Bold">
+                                            <Label.FormattedText>
+                                                <FormattedString>
+                                                    <Span Text="Birth date: "/>
+                                                    <Span Text="{Binding BirthDate, StringFormat='{0:MMMM dd, yyyy}'}"></Span>
+                                                </FormattedString>
+                                            </Label.FormattedText>
+                                        </Label>
+                                    </StackLayout>
+                                </Grid>
+                                </StackLayout>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

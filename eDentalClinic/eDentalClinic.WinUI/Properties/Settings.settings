@@ -1,0 +1,12 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="eDentalClinic.WinUI.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="APIUrl" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">http://localhost:62292/api</Value>
+    </Setting>
+    <Setting Name="APIUrlSaDocker" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">http://localhost:59399/api</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

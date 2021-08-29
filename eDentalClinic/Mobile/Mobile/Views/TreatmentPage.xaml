@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:Mobile.ViewModels"
+             xmlns:converters="clr-namespace:Mobile.Converters"
+             x:Class="Mobile.Views.TreatmentPage">
+    <ContentPage.BindingContext>
+        <vm:TreatmentViewModel></vm:TreatmentViewModel>
+    </ContentPage.BindingContext>
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:ImageConverter x:Key="imgConv"></converters:ImageConverter>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" Padding="20">
+
+            <Label FontSize="Medium">Filter by treatment</Label>
+            <Entry Placeholder="Pregled, Vađenje zuba , etc." Text="{Binding TreatmentName}"></Entry>
+            <Button Text="Search" HorizontalOptions="Center" Command="{Binding SearchTreatment}" BackgroundColor="DodgerBlue" TextColor="White" Font="17"></Button>
+
+            <ListView ItemsSource="{Binding TreatmentList}" ItemTapped="ListView_ItemTapped">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Margin="0,20,0,0" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition></ColumnDefinition>
+                                        <ColumnDefinition></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+                                    <Image Grid.Column="0" WidthRequest="280" HeightRequest="280" Source="{Binding Image,Converter={StaticResource imgConv}}"></Image>
+                                    <Label Grid.Column="1" FontSize="Medium" VerticalOptions="Center">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="Name: " FontAttributes="Bold" FontSize="Medium"/>
+                                                <Span Text="{Binding Name}"></Span>
+                                                <Span Text="{x:Static x:Environment.NewLine}" />
+                                                <Span Text="{x:Static x:Environment.NewLine}" />
+
+                                                <Span Text="Price: " FontAttributes="Bold" FontSize="Medium"/>
+                                                <Span Text="{Binding Price}" ></Span>
+                                                <Span Text="{x:Static x:Environment.NewLine}" />
+                                                <Span Text="{x:Static x:Environment.NewLine}" />
+
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+                                </Grid>
+                                <BoxView HeightRequest="1" BackgroundColor="DodgerBlue"></BoxView>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

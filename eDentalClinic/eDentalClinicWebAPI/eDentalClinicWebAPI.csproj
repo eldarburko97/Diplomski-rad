@@ -1,0 +1,102 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <AspNetCoreHostingModel>OutOfProcess</AspNetCoreHostingModel>
+    <DockerComposeProjectPath>..\docker-compose.dcproj</DockerComposeProjectPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Migrations\20210211133151_Init.cs" />
+    <Compile Remove="Migrations\20210211133151_Init.Designer.cs" />
+    <Compile Remove="Migrations\20210211145309_InitDB.cs" />
+    <Compile Remove="Migrations\20210211145309_InitDB.Designer.cs" />
+    <Compile Remove="Migrations\20210211150422_Init.cs" />
+    <Compile Remove="Migrations\20210211150422_Init.Designer.cs" />
+    <Compile Remove="Migrations\20210211235149_Init.cs" />
+    <Compile Remove="Migrations\20210211235149_Init.Designer.cs" />
+    <Compile Remove="Migrations\20210212075105_InitDB.cs" />
+    <Compile Remove="Migrations\20210212075105_InitDB.Designer.cs" />
+    <Compile Remove="Migrations\20210212081352_Init.cs" />
+    <Compile Remove="Migrations\20210212081352_Init.Designer.cs" />
+    <Compile Remove="Migrations\20210215134307_DentistColumns.cs" />
+    <Compile Remove="Migrations\20210215134307_DentistColumns.Designer.cs" />
+    <Compile Remove="Migrations\20210216112926_NewMigration.cs" />
+    <Compile Remove="Migrations\20210216112926_NewMigration.Designer.cs" />
+    <Compile Remove="Migrations\20210218064116_NewMigration2.cs" />
+    <Compile Remove="Migrations\20210218064116_NewMigration2.Designer.cs" />
+    <Compile Remove="Migrations\20210218065154_NewMigration3.cs" />
+    <Compile Remove="Migrations\20210218065154_NewMigration3.Designer.cs" />
+    <Compile Remove="Migrations\20210218070105_InitDB.cs" />
+    <Compile Remove="Migrations\20210218070105_InitDB.Designer.cs" />
+    <Compile Remove="Migrations\20210218100754_Seedtest.cs" />
+    <Compile Remove="Migrations\20210218100754_Seedtest.Designer.cs" />
+    <Compile Remove="Migrations\20210218135610_Seed2.cs" />
+    <Compile Remove="Migrations\20210218135610_Seed2.Designer.cs" />
+    <Compile Remove="Migrations\20210222113324_NewMigration.cs" />
+    <Compile Remove="Migrations\20210222113324_NewMigration.Designer.cs" />
+    <Compile Remove="Migrations\20210222123346_NewMigration2.cs" />
+    <Compile Remove="Migrations\20210222123346_NewMigration2.Designer.cs" />
+    <Compile Remove="Migrations\20210225153715_NewMigration3.cs" />
+    <Compile Remove="Migrations\20210225153715_NewMigration3.Designer.cs" />
+    <Compile Remove="Migrations\20210226083007_NewMigration4.cs" />
+    <Compile Remove="Migrations\20210226083007_NewMigration4.Designer.cs" />
+    <Compile Remove="Migrations\20210228092651_NewMigration5.cs" />
+    <Compile Remove="Migrations\20210228092651_NewMigration5.Designer.cs" />
+    <Compile Remove="Migrations\20210301083915_NewMigration6.cs" />
+    <Compile Remove="Migrations\20210301083915_NewMigration6.Designer.cs" />
+    <Compile Remove="Migrations\20210302125415_NewMigration7.cs" />
+    <Compile Remove="Migrations\20210302125415_NewMigration7.Designer.cs" />
+    <Compile Remove="Migrations\20210302130554_NewMigration8.cs" />
+    <Compile Remove="Migrations\20210302130554_NewMigration8.Designer.cs" />
+    <Compile Remove="Migrations\20210302134452_NewMigration9.cs" />
+    <Compile Remove="Migrations\20210302134452_NewMigration9.Designer.cs" />
+    <Compile Remove="Migrations\20210305170707_NewMigration10.cs" />
+    <Compile Remove="Migrations\20210305170707_NewMigration10.Designer.cs" />
+    <Compile Remove="Migrations\20210310132552_NewMigration11.cs" />
+    <Compile Remove="Migrations\20210310132552_NewMigration11.Designer.cs" />
+    <Compile Remove="Migrations\20210311215411_NewMigration12.cs" />
+    <Compile Remove="Migrations\20210311215411_NewMigration12.Designer.cs" />
+    <Compile Remove="Migrations\20210314230307_Init.cs" />
+    <Compile Remove="Migrations\20210314230307_Init.Designer.cs" />
+    <Compile Remove="Migrations\20210315225509_DataSeed.cs" />
+    <Compile Remove="Migrations\20210315225509_DataSeed.Designer.cs" />
+    <Compile Remove="Migrations\20210315231250_DataSeed.cs" />
+    <Compile Remove="Migrations\20210315231250_DataSeed.Designer.cs" />
+    <Compile Remove="Migrations\20210316090622_Init.cs" />
+    <Compile Remove="Migrations\20210316090622_Init.Designer.cs" />
+    <Compile Remove="Migrations\20210316095136_SeedData.cs" />
+    <Compile Remove="Migrations\20210316095136_SeedData.Designer.cs" />
+    <Compile Remove="Migrations\20210316100528_DataSeed1.cs" />
+    <Compile Remove="Migrations\20210316100528_DataSeed1.Designer.cs" />
+    <Compile Remove="Migrations\20210316111221_DataSeed1.cs" />
+    <Compile Remove="Migrations\20210316111221_DataSeed1.Designer.cs" />
+    <Compile Remove="Migrations\20210316142338_DataSeed1.cs" />
+    <Compile Remove="Migrations\20210316142338_DataSeed1.Designer.cs" />
+    <Compile Remove="Migrations\20210316142451_DataSeed2.cs" />
+    <Compile Remove="Migrations\20210316142451_DataSeed2.Designer.cs" />
+    <Compile Remove="Migrations\20210316142528_DataSeed3.cs" />
+    <Compile Remove="Migrations\20210316142528_DataSeed3.Designer.cs" />
+    <Compile Remove="Migrations\20210316143344_DataSeed3.cs" />
+    <Compile Remove="Migrations\20210316143344_DataSeed3.Designer.cs" />
+    <Compile Remove="Migrations\20210316144152_DataSeed3.cs" />
+    <Compile Remove="Migrations\20210316144152_DataSeed3.Designer.cs" />
+    <Compile Remove="Migrations\20210317151519_DataSeed.cs" />
+    <Compile Remove="Migrations\20210317151519_DataSeed.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="6.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.AspNetCore.Cors" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.4" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
+    <PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="5.6.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\eDentalClinic.Model\eDentalClinic.Model.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:Mobile.ViewModels"
+             x:Class="Mobile.Views.PaymentPage">
+    <ContentPage.BindingContext>
+        <vm:PaymentViewModel></vm:PaymentViewModel>
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <StackLayout>
+            <StackLayout Padding="50">
+
+                <Label FontSize="Large" HorizontalOptions="Center" Text="Make a payment"></Label>
+
+                <Label Text="First name:"></Label>
+                <Entry Text="{Binding FirstName}" IsReadOnly="True" BackgroundColor="LightGray"></Entry>
+
+                <Label Text="Last name:"></Label>
+                <Entry Text="{Binding LastName}" IsReadOnly="True" BackgroundColor="LightGray"></Entry>
+
+                <Label Text="Phone:"></Label>
+                <Entry Text="{Binding Phone}" IsReadOnly="True" BackgroundColor="LightGray"></Entry>
+
+                <Label Text="Email:"></Label>
+                <Entry Text="{Binding Email}" IsReadOnly="True" BackgroundColor="LightGray"></Entry>
+
+               
+                <Label Text="Dentist:"></Label>
+                <Entry Text="{Binding Dentist}" IsReadOnly="True" BackgroundColor="LightGray"></Entry>
+
+                <Label Text="Treatment:"></Label>
+                <Entry Text="{Binding TreatmentName}" IsReadOnly="True" BackgroundColor="LightGray"></Entry>
+
+                <Label Text="Payment amount:"></Label>
+                <Entry Text="{Binding Amount}" IsReadOnly="True" BackgroundColor="LightGray"></Entry>
+
+                <Label Text="Date of payment:"></Label>
+                <Entry Text="{Binding Date, StringFormat='{0:MM/dd/yyyy}' }" IsReadOnly="True" BackgroundColor="LightGray"></Entry>
+
+                <Label Text="Credit card number:"></Label>
+                <Entry Text="{Binding CreditCardNumber}"></Entry>
+
+                <!--  <Label Text="End date"></Label>
+            <DatePicker Date="{Binding EndDate}"></DatePicker>-->
+
+                <Button Margin="0,30,0,0" Command="{Binding AddPaymentCommand}" Text="Book an appointment" Font="17" BackgroundColor="DodgerBlue" TextColor="White"></Button>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

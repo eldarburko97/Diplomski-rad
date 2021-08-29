@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:Mobile.ViewModels"
+             x:Class="Mobile.Views.MyAppointmentsPage">
+    <ContentPage.BindingContext>
+        <vm:MyAppointmentsViewModel></vm:MyAppointmentsViewModel>
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <StackLayout Padding="20">
+            <Label FontSize="Large" HorizontalOptions="Center" Text="My appointments"></Label>
+            <Label FontSize="Medium">Filter by treatment</Label>
+            <Entry Placeholder="Pregled, Vađenje zuba, etc." Text="{Binding TreatmentName}"></Entry>
+
+            <Label FontSize="Medium" HorizontalOptions="Center" Text="Reservation from"></Label>
+            <DatePicker Date="{Binding StartDate}"></DatePicker>
+            <Label FontSize="Medium" HorizontalOptions="CenterAndExpand" Text="Reservation to"></Label>
+            <DatePicker Date="{Binding EndDate}"></DatePicker>
+
+            <Button Text="Search" HorizontalOptions="Center" Command="{Binding SearchAppointmentsCommand}"  Font="17" BackgroundColor="DodgerBlue" TextColor="White"></Button>
+
+            <ListView ItemsSource="{Binding AppointmentList}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout>
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition></RowDefinition>
+                                    </Grid.RowDefinitions>
+                                    <StackLayout Grid.Row="0" Orientation="Horizontal" Spacing="6">
+                                        <Label FontSize="16">
+                                            <Label.FormattedText>
+                                                
+                                                <FormattedString>
+                                                    <Span Text="Dentist name: "/>
+                                                    <Span Text="{Binding Dentist.FirstName}" Style="{DynamicResource ListItemTextStyle}" ></Span>
+                                                    <Span Text="{x:Static x:Environment.NewLine}" />
+
+
+                                                    <Span Text="Dentist surname: "/>
+                                                    <Span Text="{Binding Dentist.LastName}" Style="{DynamicResource ListItemTextStyle}"></Span>
+                                                    <Span Text="{x:Static x:Environment.NewLine}" />
+
+                                                    <Span Text="Treatment : "/>
+                                                    <Span Text="{Binding Treatment.Name}" Style="{DynamicResource ListItemTextStyle}"></Span>
+                                                    <Span Text="{x:Static x:Environment.NewLine}" />
+
+                                                    <Span Text="Date : "/>
+                                                    <Span Text="{Binding StartDate,StringFormat='{0:MMMM dd, yyyy HH:mm}'}" Style="{DynamicResource ListItemTextStyle}" ></Span>
+                                                    <Span Text="{x:Static x:Environment.NewLine}" />
+
+                                             </FormattedString>
+                                            </Label.FormattedText>
+                                        </Label>
+                                        <StackLayout Padding="30,0,0,0" VerticalOptions="Center">
+                                            <Button HorizontalOptions="Center" VerticalOptions="Center" Text="Cancel Reservation" Clicked="Button_Clicked"></Button>
+                                        </StackLayout>
+                                    </StackLayout>
+                                </Grid>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

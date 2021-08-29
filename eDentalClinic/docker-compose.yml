@@ -1,0 +1,30 @@
+version: '3.4'
+
+services:
+  eclinic-sql:
+    image: mcr.microsoft.com/mssql/server:2017-latest-ubuntu
+    restart: unless-stopped
+    container_name: eclinicdb
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=QWElkj132!      
+    ports:
+      - 1401:1433
+    networks:
+      - eclinic
+  edentalclinicwebapi:
+    image: ${DOCKER_REGISTRY-}edentalclinicwebapi
+    build:
+      context: .
+      dockerfile: eDentalClinicWebAPI/Dockerfile
+    #environment:
+     # - ConnectionStrings:DefaultConnection=Server=localhost,1401;Database=160170;User=sa;Password=QWElkj132!;
+    networks:
+      - eclinic
+    depends_on:
+      - eclinic-sql
+    ports:
+      - "62292:80"   
+networks:
+  eclinic:
+    driver: bridge  

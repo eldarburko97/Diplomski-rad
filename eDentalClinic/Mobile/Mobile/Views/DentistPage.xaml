@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:Mobile.ViewModels"
+             xmlns:converters="clr-namespace:Mobile.Converters"
+             x:Class="Mobile.Views.DentistPage">
+    <ContentPage.BindingContext>
+        <vm:DentistViewModel></vm:DentistViewModel>
+    </ContentPage.BindingContext>
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:ImageConverter x:Key="imgConv"></converters:ImageConverter>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" Padding="20">
+            
+            <Label FontSize="Medium">Filter by dentist</Label>
+            <Entry Placeholder="First name" Text="{Binding FirstName}"></Entry>
+            <Entry Placeholder="Last name" Text="{Binding LastName}"></Entry>
+            <Button Text="Search" HorizontalOptions="Center" Command="{Binding SearchDentist}" BackgroundColor="DodgerBlue" TextColor="White" Font="17"></Button>
+            
+            <ListView ItemsSource="{Binding DentistList}" ItemTapped="ListView_ItemTapped">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Padding="10,0,10,10" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition></ColumnDefinition>
+                                        <ColumnDefinition></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+                                    <Image Grid.Column="0" WidthRequest="280" HeightRequest="280" Source="{Binding Image,Converter={StaticResource imgConv}}"></Image>
+                                    <Label  Grid.Column="1" HorizontalOptions="FillAndExpand" VerticalOptions="Center">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="First name: " FontAttributes="Bold"/>
+                                                <Span Text="{Binding FirstName}"></Span>
+                                                <Span Text="{x:Static x:Environment.NewLine}" />
+
+                                                <Span Text="Last name: " FontAttributes="Bold"/>
+                                                <Span Text="{Binding LastName}" ></Span>
+                                                <Span Text="{x:Static x:Environment.NewLine}" />
+
+                                                <Span Text="Title: " FontAttributes="Bold"/>
+                                                <Span Text="{Binding Branch.Title}" ></Span>
+                                                <Span Text="{x:Static x:Environment.NewLine}" />
+
+                                                <Span Text="Birth date: " FontAttributes="Bold"/>
+                                                <Span Text="{Binding BirthDate, StringFormat='{0:MMMM dd, yyyy}'}" ></Span>
+                                                <Span Text="{x:Static x:Environment.NewLine}" />
+
+                                                <Span Text="Description: " FontAttributes="Bold"/>
+                                                <Span Text="{Binding Description}" ></Span>
+                                                <Span Text="{x:Static x:Environment.NewLine}" />
+                                                
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+                                </Grid>
+                                <BoxView HeightRequest="1" BackgroundColor="DodgerBlue"></BoxView>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

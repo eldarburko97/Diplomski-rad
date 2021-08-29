@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:Mobile.ViewModels"
+             x:Class="Mobile.Views.SettingsPage">
+    <ContentPage.BindingContext>
+        <vm:SettingsViewModel></vm:SettingsViewModel>
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <StackLayout Padding="30" HorizontalOptions="FillAndExpand" VerticalOptions="Center">
+            <StackLayout BackgroundColor="LightGray" Padding="10">
+                <StackLayout BackgroundColor="LightBlue" HorizontalOptions="FillAndExpand">
+                    <Button Text="If you want to change password click here !!!" HeightRequest="50" BackgroundColor="LightBlue" HorizontalOptions="FillAndExpand" Command="{Binding ShowCommand}"></Button>
+                </StackLayout>
+
+                <StackLayout Margin="0,20,0,0" IsVisible="{Binding EntryVisible}">
+                    <Label Text="Password: "></Label>
+                    <Entry Text="{Binding Password}" IsPassword="True"></Entry>
+                    <Label Text="Confirm password: "></Label>
+                    <Entry Text="{Binding ConfirmPassword}" IsPassword="True"></Entry>
+                    <StackLayout VerticalOptions="EndAndExpand" Orientation="Horizontal" Spacing="2" Padding="2">
+                        <Button Text="Hide" BackgroundColor="LightBlue" Command="{Binding HideCommand}" HorizontalOptions="CenterAndExpand"></Button>
+                        <Button Text="Save" BackgroundColor="LightBlue" HorizontalOptions="CenterAndExpand" Command="{Binding ChangePasswordCommand}"></Button>
+                    </StackLayout>
+
+                </StackLayout>
+            </StackLayout>
+
+            <Label Text="Phone: "></Label>
+            <Entry Text="{Binding Phone}"></Entry>
+            <StackLayout Margin="0,20,0,0">
+                <Label Text="Email: "></Label>
+                <Entry Text="{Binding Email}"></Entry>
+            </StackLayout>
+            <StackLayout HorizontalOptions="FillAndExpand" >
+                <Button HeightRequest="50" Text="Submit" BackgroundColor="DodgerBlue" TextColor="White" HorizontalOptions="FillAndExpand" Command="{Binding UpdateCommand}"></Button>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:Mobile.ViewModels"
+             x:Class="Mobile.Views.HomePage">
+    <ContentPage.BindingContext>
+        <vm:HomeViewModel></vm:HomeViewModel>
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+            <Label HorizontalTextAlignment="Center">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span Text="Welcome to " FontAttributes="Bold" FontSize="Large"></Span>
+                        <Span Text="{Binding Name}" FontAttributes="Bold" FontSize="Large"></Span>
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+            <Label HorizontalTextAlignment="Center">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span Text="Address: " FontAttributes="Bold" FontSize="Small"></Span>
+                        <Span Text="{Binding Address}" FontAttributes="Bold" FontSize="Small"></Span>
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+            <Label HorizontalTextAlignment="Center">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span Text="Phone: " FontAttributes="Bold" FontSize="Small"></Span>
+                        <Span Text="{Binding Phone}" FontAttributes="Bold" FontSize="Small"></Span>
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+            <Label HorizontalTextAlignment="Center">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span Text="Email: " FontAttributes="Bold" FontSize="Small"></Span>
+                        <Span Text="{Binding Email}" FontAttributes="Bold" FontSize="Small"></Span>
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+            <Label Text="Notifications"></Label>
+            <BoxView 
+            HeightRequest="1" 
+            BackgroundColor="DodgerBlue" 
+            HorizontalOptions="FillAndExpand" />
+            <ListView ItemsSource="{Binding NotificationList}"  SeparatorVisibility="None" HasUnevenRows="False">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout>
+                                <Grid Padding="0" RowSpacing="0">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition></RowDefinition>
+                                    </Grid.RowDefinitions>
+                                    <Label Margin="10,0,0,0" Grid.Row="0">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="{Binding Title}" FontAttributes="Bold" FontSize="Small"></Span>
+                                                <Span Text="{x:Static x:Environment.NewLine}" />
+                                                <Span Text="{Binding NotificationDate,StringFormat='{0:MMMM dd, yyyy}'}}" FontSize="Micro" FontAttributes="Italic"></Span>
+                                                <Span Text=" - " FontSize="Micro" FontAttributes="Italic"></Span>
+                                                <Span Text="{Binding User.FirstName}" FontSize="Micro" FontAttributes="Italic"></Span>
+                                                <Span Text=" "></Span>
+                                                <Span Text="{Binding User.LastName}" FontSize="Micro" FontAttributes="Italic"></Span>
+                                                <Span Text="{x:Static x:Environment.NewLine}" />
+                                                <Span Text="{Binding Text}" FontSize="Small"></Span>
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+                                </Grid>
+                                <BoxView 
+            HeightRequest="1" 
+            BackgroundColor="DodgerBlue" 
+            HorizontalOptions="FillAndExpand" />
+                            </StackLayout>
+
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
