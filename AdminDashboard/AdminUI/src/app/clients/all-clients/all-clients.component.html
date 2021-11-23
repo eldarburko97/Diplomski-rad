@@ -1,0 +1,30 @@
+<div class="container pt-3">
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <input [(ngModel)]="firstName" type="text" class="form-control searchQueryInput" id="FirstName" name="firstName" placeholder="First name">
+    </div>
+    <div class="form-group col-md-6">
+      <input [(ngModel)]="lastName" type="text" class="form-control searchQueryInput" id="LastName" name="lastName" placeholder="Last name">
+    </div>
+    <button class="btn btn-primary" style="margin: 0 auto; display: block;"
+      (click)="searchClients()">Search</button>
+  </div>
+  <!-- <input id="searchQueryInput" type="text" placeholder="Search" value="" style="width: 100%;"> -->
+  <div class="card-deck">
+    <div [ngClass]="'card'" *ngFor="let item of collection | paginate: {
+    itemsPerPage: 3,
+    currentPage: p,
+    totalItems: total }" class="pagination" style="margin-top: 80px;">
+      <a [routerLink]="['../client-info', item.userID]">
+        <img [src]="domSanitizer.bypassSecurityTrustResourceUrl('data:image/png;base64,'+ item.image)" class="card-img-top rounded-circle mx-auto d-block pt-1" alt="eee"
+          style="height: 200px; width: 200px;">
+        <div class="card-body">
+          <h5 class="card-title text-center">{{item.firstName + ' ' + item.lastName}}</h5>
+          <p class="card-text text-center">{{item.email}}</p>
+          <p class="card-text text-center">{{item.phone}}</p>
+        </div>
+      </a>
+    </div>
+  </div>
+  <pagination-controls class="text-left my-pagination text-right" (pageChange)="p = $event"></pagination-controls>
+</div>

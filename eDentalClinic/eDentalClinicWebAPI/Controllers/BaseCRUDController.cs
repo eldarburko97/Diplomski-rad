@@ -1,13 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.SqlClient;
-using System.Linq;
-using System.Threading.Tasks;
 using AutoMapper;
 using eDentalClinicWebAPI.Filters;
 using eDentalClinicWebAPI.Services;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Data.SqlClient;
 
 namespace eDentalClinicWebAPI.Controllers
 {
@@ -23,7 +20,7 @@ namespace eDentalClinicWebAPI.Controllers
             _mapper = mapper;
         }
         [HttpGet]
-        public List<T> GetAll([FromQuery]TSearch request)
+        public List<T> GetAll([FromQuery] TSearch request)
         {
             return _service.GetAll(request);
         }
@@ -32,10 +29,27 @@ namespace eDentalClinicWebAPI.Controllers
         {
             return _service.GetById(id);
         }
-        
+
+        [HttpPost("insert")]
+        public IActionResult Insert([FromForm] TInsert request)
+        {
+            try
+            {
+                return Ok(_service.Insert(request));
+            }
+            catch (Exception ex)
+            {
+                if (ex.InnerException is SqlException)
+                {
+                    throw new UserException("Cannot insert duplicate");
+                }
+                else throw new Exception();
+                throw new Exception(ex.Message);
+            }
+        }
+
         [HttpPost]
-        [Route("")]
-        public IActionResult Insert([FromBody]TInsert request)
+        public IActionResult Insert2([FromBody] TInsert request)
         {
             try
             {
@@ -55,10 +69,17 @@ namespace eDentalClinicWebAPI.Controllers
 
 
         [HttpPut("{id}")]
-        public T Update(int id, TUpdate request)
+        public T Update(int id, [FromForm] TUpdate request)
         {
             return _service.Update(id, request);
         }
+
+        [HttpPut("update/{id}")]
+        public T Update2(int id, [FromBody] TUpdate request)
+        {
+            return _service.Update(id, request);
+        }
+
         [HttpDelete("{id}")]
         public T Delete(int id)
         {

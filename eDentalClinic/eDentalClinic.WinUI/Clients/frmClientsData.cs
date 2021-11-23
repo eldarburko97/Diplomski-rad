@@ -1,14 +1,8 @@
-﻿using eDentalClinic.Model;
-using eDentalClinic.Model.Requests;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using eDentalClinic.Model;
+using eDentalClinic.Model.Requests;
 
 namespace eDentalClinic.WinUI.Clients
 {
@@ -59,7 +53,7 @@ namespace eDentalClinic.WinUI.Clients
             }
             dgvClients.AutoGenerateColumns = false;
             dgvClients.DataSource = result;
-            if(result.Count == 0)
+            if (result.Count == 0)
             {
                 MessageBox.Show("There are no results for this search", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }

@@ -1,15 +1,11 @@
-﻿using AutoMapper;
-using eDentalClinic.Model;
+﻿using System.Collections.Generic;
+using System.Linq;
+using AutoMapper;
 using eDentalClinic.Model.Requests;
 using eDentalClinicWebAPI.Database;
 using eDentalClinicWebAPI.Filters;
 using eDentalClinicWebAPI.Helper;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace eDentalClinicWebAPI.Services
 {
@@ -62,7 +58,8 @@ namespace eDentalClinicWebAPI.Services
             {
                 query = query.Where(x => x.LastName == search.LastName);
             }
-            return _mapper.Map<List<eDentalClinic.Model.User>>(query.ToList());            
+            var list = query.ToList();
+            return _mapper.Map<List<eDentalClinic.Model.User>>(query.ToList());
         }
 
         public eDentalClinic.Model.User Insert(UserInsertRequest request)
@@ -82,7 +79,7 @@ namespace eDentalClinicWebAPI.Services
 
         public eDentalClinic.Model.User Update(int id, UserInsertRequest request)
         {
-            if(request.Password != request.ConfirmPassword)
+            if (request.Password != request.ConfirmPassword)
             {
                 throw new UserException("Password and password confirm do not match!");
             }
@@ -96,6 +93,6 @@ namespace eDentalClinicWebAPI.Services
             _context.Users.Update(entity);
             _context.SaveChanges();
             return _mapper.Map<eDentalClinic.Model.User>(entity);
-        }        
+        }
     }
 }

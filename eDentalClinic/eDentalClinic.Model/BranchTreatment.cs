@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace eDentalClinic.Model
+﻿namespace eDentalClinic.Model
 {
-  public  class BranchTreatment
+    public class BranchTreatment
     {
+        public int BranchTreatmentID { get; set; }
         public int BranchID { get; set; }
         public int TreatmentID { get; set; }
 

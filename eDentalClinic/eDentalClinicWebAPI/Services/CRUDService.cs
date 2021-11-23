@@ -1,9 +1,7 @@
-﻿using AutoMapper;
-using eDentalClinicWebAPI.Database;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
+using AutoMapper;
+using eDentalClinicWebAPI.Database;
 
 namespace eDentalClinicWebAPI.Services
 {
@@ -44,7 +42,7 @@ namespace eDentalClinicWebAPI.Services
             return _mapper.Map<T>(entity);
         }
 
-        public T Update(int id, TUpdate model)
+        public virtual T Update(int id, TUpdate model)
         {
             var entity = _context.Set<TDatabase>().Find(id);
             _mapper.Map(model, entity);

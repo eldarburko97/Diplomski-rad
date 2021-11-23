@@ -1,0 +1,38 @@
+<div class="container" style="position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);">
+  <!-- <div *ngIf="createBranchForm.invalid" class="alert alert-danger" role="alert">
+    This is a danger alert—check it out!
+  </div> -->
+  <form #form="ngForm" (submit)="onSubmit()" autocomplete="off">
+    <!-- <input type="hidden" id="branchID" name="branchID" [(ngModel)]="branch.branchID"> -->
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="client">Client:</label>
+      <select appSelectValidator="0" #client="ngModel" id="client" [(ngModel)]="payment.userID"  class="form-control"  name="client" [class.is-invalid]="client.errors?.branchDomain" [class.is-valid]="client.valid && !client.errors?.branchDomain">
+        <option value="0">Select a client</option>
+        <option *ngFor="let client of clients" [value]="client.userID">{{client.firstName + " " + client.lastName}}</option>
+      </select>
+    </div>
+    <div class="form-group col-md-6">
+      <label for="treatment">Treatment:</label>
+      <select (change)="onChange($event)" appSelectValidator="0" #treatment="ngModel" id="treatment" [(ngModel)]="payment.treatmentID"  class="form-control"  name="treatment" [class.is-invalid]="treatment.errors?.branchDomain" [class.is-valid]="treatment.valid && !treatment.errors?.branchDomain">
+        <option value="0">Select a treatment</option>
+        <option *ngFor="let treatment of treatments" [value]="treatment.treatmentID">{{treatment.name}}</option>
+      </select>
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="amount">Amount:</label>
+      <input [(ngModel)]="payment.amount" readonly type="number" class="form-control" id="Amount" name="amount" #amount="ngModel"
+         [class.is-invalid]="amount.invalid && amount.touched" [class.is-valid]="amount.valid">
+    </div>
+    <div class="form-group col-md-6">
+      <label for="Date">Date:</label>
+      <input [(ngModel)]="payment.date" type="text" class="form-control" id="Date" name="date" #date="ngModel" bsDatepicker [bsConfig]="datePickerConfig" [class.is-invalid]="!payment.date" [class.is-valid]="date.valid">
+    </div>
+  </div>
+  <div class="form-group">
+    <button type="submit" class="btn btn-primary form-control">Save</button>
+  </div>
+  </form>
+</div>

@@ -1,9 +1,5 @@
 ﻿using AutoMapper;
 using eDentalClinic.Model.Requests;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace eDentalClinicWebAPI.Mappers
 {
@@ -11,7 +7,9 @@ namespace eDentalClinicWebAPI.Mappers
     {
         public AppMapper()
         {
-            CreateMap<Database.Dentist, eDentalClinic.Model.Dentist>().ReverseMap();
+            CreateMap<Database.City, eDentalClinic.Model.City>().ReverseMap();
+            //CreateMap<Database.Dentist, eDentalClinic.Model.Dentist>().ForMember(x => x.BirthDate2, opt => opt.MapFrom(src => src.BirthDate.ToString("mm/dd/yyyy"))).ReverseMap();
+            CreateMap<Database.Dentist, eDentalClinic.Model.Dentist>();
             CreateMap<Database.Dentist, DentistInsertRequest>().ReverseMap();
             CreateMap<Database.Branch, eDentalClinic.Model.Branch>().ReverseMap();
             CreateMap<Database.Branch, BranchInsertRequest>().ReverseMap();
@@ -37,6 +35,7 @@ namespace eDentalClinicWebAPI.Mappers
             CreateMap<Database.Payment, PaymentInsertRequest>().ReverseMap();
             CreateMap<Database.Notification, eDentalClinic.Model.Notification>().ReverseMap();
             CreateMap<Database.Notification, NotificationInsertRequest>().ReverseMap();
+            //CreateMap<Database.Dentist, eDentalClinic.Model.DentistAddDTO>().ReverseMap();
         }
     }
 }

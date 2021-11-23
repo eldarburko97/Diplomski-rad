@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Runtime.Serialization;
-using System.Text;
 
 namespace eDentalClinic.Model
 {
-   public class Dentist
+    public class Dentist
     {
         public int DentistID { get; set; }
         public int DentalClinicID { get; set; }
@@ -19,7 +16,9 @@ namespace eDentalClinic.Model
         public byte[] Image { get; set; }
         public string Description { get; set; }
         public bool Active { get; set; }
+        public string BirthDate2 { get; set; }
 
-        public  Branch Branch { get; set; }
+
+        public Branch Branch { get; set; }
     }
 }

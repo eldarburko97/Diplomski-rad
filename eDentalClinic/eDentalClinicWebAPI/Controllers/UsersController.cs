@@ -1,14 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.SqlClient;
-using System.Linq;
-using System.Threading.Tasks;
 using eDentalClinic.Model;
 using eDentalClinic.Model.Requests;
-using eDentalClinicWebAPI.Filters;
 using eDentalClinicWebAPI.Services;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -25,13 +19,14 @@ namespace eDentalClinicWebAPI.Controllers
         }
 
         [HttpGet]
-        [Authorize]
-        public ActionResult<List<User>> GetAll([FromQuery]UserSearchRequest search)
+        //[Authorize(Roles = "Administrator")]
+        public ActionResult<List<User>> GetAll([FromQuery] UserSearchRequest search)
         {
             return _service.GetAll(search);
         }
 
         [HttpGet("{userId}")]
+        //[Authorize(Roles = "Client")]
         public ActionResult<User> GetById(int userId)
         {
             return _service.GetById(userId);
@@ -46,12 +41,12 @@ namespace eDentalClinicWebAPI.Controllers
             }
             catch (DbUpdateException)
             {
-                return BadRequest("Duplicate user");              
+                return BadRequest("Duplicate user");
             }
         }
 
         [HttpPut("{id}")]
-        public ActionResult<User> Update(int id, [FromBody]UserInsertRequest request)
+        public ActionResult<User> Update(int id, [FromBody] UserInsertRequest request)
         {
             try
             {
@@ -61,6 +56,6 @@ namespace eDentalClinicWebAPI.Controllers
             {
                 return BadRequest();
             }
-        }       
+        }
     }
 }

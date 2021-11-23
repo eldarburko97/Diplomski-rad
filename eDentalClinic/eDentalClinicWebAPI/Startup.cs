@@ -1,23 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using AutoMapper;
 using eDentalClinic.Model.Requests;
 using eDentalClinicWebAPI.Database;
-using eDentalClinicWebAPI.Filters;
 using eDentalClinicWebAPI.Security;
 using eDentalClinicWebAPI.Services;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
+using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using Newtonsoft.Json;
 
@@ -36,13 +29,17 @@ namespace eDentalClinicWebAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddCors();
-            services.AddMvc(x => x.Filters.Add<ErrorFilter>()).SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddControllers();
+            //services.AddMvc(x => x.Filters.Add<ErrorFilter>());
             services.AddDbContext<eDentalClinicContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-            services.AddMvc()
-    .AddJsonOptions(options => {
-        options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
-    });
-            services.AddAutoMapper(typeof(Startup));
+            services.AddMvc().AddNewtonsoftJson(options => options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore);
+            //services.AddAutoMapper(typeof(Startup));
+
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+
+
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
@@ -50,11 +47,13 @@ namespace eDentalClinicWebAPI
             services.AddAuthentication("BasicAuthentication")
               .AddScheme<AuthenticationSchemeOptions, BasicAuthenticationHandler>("BasicAuthentication", null);
 
+
+
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IDentalClinicService, DentalClinicService>();
             services.AddScoped<IRecommendationService, RecommendationService>();
             services.AddScoped<ICRUDService<eDentalClinic.Model.Branch, BranchSearchRequest, BranchInsertRequest, BranchInsertRequest>, BranchService>();
-            services.AddScoped<ICRUDService<eDentalClinic.Model.Dentist, DentistSearchRequest, DentistInsertRequest, DentistInsertRequest>, DentistService>();          
+            services.AddScoped<ICRUDService<eDentalClinic.Model.Dentist, DentistSearchRequest, eDentalClinic.Model.DentistAddDTO, eDentalClinic.Model.DentistAddDTO>, DentistService>();
             services.AddScoped<ICRUDService<eDentalClinic.Model.Treatment, TreatmentSearchRequest, TreatmentInsertRequest, TreatmentInsertRequest>, TreatmentService>();
             services.AddScoped<ICRUDService<eDentalClinic.Model.BranchTreatment, BranchTreatmentSearchRequest, BranchTreatmentInsertRequest, BranchTreatmentInsertRequest>, BranchTreatmentService>();
             services.AddScoped<ICRUDService<eDentalClinic.Model.City, CitySearchRequest, CityInsertRequest, CityInsertRequest>, CityService>();
@@ -69,7 +68,7 @@ namespace eDentalClinicWebAPI
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
@@ -80,16 +79,21 @@ namespace eDentalClinicWebAPI
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
-            app.UseAuthentication();
+            //app.UseAuthentication();
             //  app.UseHttpsRedirection();
-            
+
             app.UseCors(options =>
            options.WithOrigins("http://localhost:62292")
            .AllowAnyOrigin()
            .AllowAnyMethod()
            .AllowAnyHeader());
             //app.UseMiddleware<BasicAuthenticationHandler>();
-            app.UseMvc();
+            //app.UseMvc();
+            app.UseRouting();
+            app.UseAuthentication();
+            app.UseAuthorization();
+            app.UseEndpoints(endpoints =>
+            endpoints.MapControllers());
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {

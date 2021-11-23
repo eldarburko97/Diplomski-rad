@@ -1,0 +1,91 @@
+<div class="container">
+  <div class="photo" style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
+    <img *ngIf="!imageExist" src={{dentistImage}} class="rounded-circle" alt="..." style="width: 100%; height: 50%;">
+    <img *ngIf="imageExist && !img"
+      [src]="domSanitizer.bypassSecurityTrustResourceUrl('data:image/jpeg;base64,'+ dentistImage)"
+      class="rounded-circle" alt="..." style="width: 100%; height: 50%;">
+      <!-- <img *ngIf="img" [src]="url" class="rounded-circle" alt="..." style="width: 100%; height: 50%;"> -->
+      <img *ngIf="imageExist && img" src={{dentistImage}} class="rounded-circle" alt="..." style="width: 100%; height: 50%;">
+      <label class="custom-file-upload mt-3 form-control text-center btn btn-primary">
+      <input type="file" (change)="onFileSelected($event)" />
+      Upload
+    </label>
+    <span *ngIf="fileChosen; else elseBlock">{{fileName}}</span>
+    <ng-template #elseBlock>No file chosen</ng-template>
+  </div>
+  <div class="info">
+    <form #form="ngForm" (submit)="onSubmit(form); form.resetForm()" autocomplete="off">
+      <input type="hidden" id="DentistID" name="dentistID" [(ngModel)]="dentist.dentistID">
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="FirstName" [class.invalid-label]="firstName.invalid">First name:</label>
+          <input [(ngModel)]="dentist.firstName" type="text" class="form-control" id="FirstName" name="firstName" #firstName="ngModel"
+            placeholder="First name" [pattern]="'^[a-zA-Z ]*$'" required  [class.is-invalid]="firstName.invalid && firstName.touched" [class.is-valid]="firstName.valid">
+            <!-- <span class="invalid-feedback" *ngIf="firstName.invalid && firstName.touched">First name is
+              required</span> -->
+        </div>
+        <div class="form-group col-md-6">
+          <label for="LastName">Last name:</label>
+          <input [(ngModel)]="dentist.lastName" type="text" class="form-control" id="LastName" name="lastName" #lastName="ngModel" [pattern]="'^[a-zA-Z ]*$'" required
+            placeholder="Last name" [class.is-invalid]="lastName.invalid && lastName.touched" [class.is-valid]="lastName.valid">
+            <!-- <span class="invalid-feedback" *ngIf="lastName.invalid && lastName.touched">Last name is
+              required</span> -->
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="Phone">Phone:</label>
+          <input [(ngModel)]="dentist.phone" type="text" class="form-control" id="Phone" name="phone" #phone="ngModel" required
+            placeholder="Phone" [class.is-invalid]="phone.invalid && phone.touched" [class.is-valid]="phone.valid">
+            <!-- <span class="invalid-feedback" *ngIf="phone.invalid && phone.touched">Phone is
+              required</span> -->
+        </div>
+        <div class="form-group col-md-6">
+          <label for="Email">Email:</label>
+          <input [(ngModel)]="dentist.email" type="email" class="form-control" id="Email" name="email" #email="ngModel" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required
+            placeholder="Email" [class.is-invalid]="email.invalid && email.touched" [class.is-valid]="email.valid">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="Address">Address</label>
+          <input [(ngModel)]="dentist.address" type="text" class="form-control" id="Address" name="address" #address="ngModel"
+            placeholder="Address" required [class.is-invalid]="address.invalid && address.touched" [class.is-valid]="address.valid">
+        </div>
+        <div class="form-group col-md-6">
+          <label for="BirthDate">Birth date:</label>
+          <input [(ngModel)]="dentist.birthDate" type="text" class="form-control" id="BirthDate" name="birthDate" bsDatepicker [bsConfig]="datePickerConfig"
+            placeholder="BirthDate">
+            <!-- <input class="form-control" placeholder="yyyy-mm-dd"
+             name="birthDate" [(ngModel)]="model" ngbDatepicker #d="ngbDatepicker"> -->
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="branch">Branch:</label>
+        <select appSelectValidator="0" #branch="ngModel" id="branch" [(ngModel)]="dentist.branchID"  class="form-control"  name="branch" [class.is-invalid]="branch.errors?.branchDomain && branch.touched" [class.is-valid]="branch.valid && !branch.errors?.branchDomain">
+          <option value="0">Select a branch</option>
+          <option *ngFor="let branch of branches" [value]="branch.branchID">{{branch.name}}</option>
+        </select>
+        <!-- <span class="invalid-feedback" *ngIf="branch.touched && branch.errors?.branchDomain">Branch is required</span> -->
+      </div>
+      <div class="form-group">
+        <label for="Description">Description:</label>
+        <textarea [(ngModel)]="dentist.description" id="Description" name="description" class="form-control" #description="ngModel" required
+          placeholder="Description" name="description" rows="5" cols="50" [class.is-invalid]="description.invalid && description.touched" [class.is-valid]="description.valid">Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae, earum!
+          </textarea>
+      </div>
+      <div class="form-group">
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" id="active" name="active" [(ngModel)]="dentist.active">
+          <label class="form-check-label" for="active">
+            Active
+          </label>
+        </div>
+      </div>
+      <div class="form-group">
+        <button type="submit" class="btn btn-primary form-control">Save</button>
+      </div>
+      <!-- <button type="submit" class="btn btn-primary">Sign in</button> -->
+    </form>
+  </div>
+</div>

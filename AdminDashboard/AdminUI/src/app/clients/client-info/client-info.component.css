@@ -1,0 +1,23 @@
+.container {
+  display: grid;
+   grid-template-columns: 0.5fr 1fr;
+     grid-column-gap: 100px;
+     margin-top: 20px;
+     position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+input[type="file"] {
+  display: none;
+}
+
+
+
+/* @media (min-width: 1600px) {
+  .container {
+    margin-top: 130px;
+     background-color: green;
+  }
+} */

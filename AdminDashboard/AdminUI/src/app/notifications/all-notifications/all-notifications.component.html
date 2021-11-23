@@ -1,0 +1,19 @@
+<div class="container pt-5">
+  <table class="table mt-5" style="background-color: #fff; text-align: center; ">
+    <caption style="color: #333; font-weight: bold;">List of notifications</caption>
+    <thead>
+      <tr>
+        <th scope="col">Id</th>
+        <th scope="col">Name</th>
+        <th scope="col">Title</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="branch" *ngFor="let notification of notifications" style="cursor: pointer" (click)="navigate(notification)">
+        <th scope="row">{{notification.notificationID}}</th>
+        <td>{{notification.title}}</td>
+        <td>{{notification.notificationDate | date: 'MM/dd/yyyy'}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

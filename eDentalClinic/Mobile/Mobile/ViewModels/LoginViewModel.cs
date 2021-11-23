@@ -1,11 +1,7 @@
-﻿using eDentalClinic.Model;
-using eDentalClinic.Model.Requests;
-using Mobile.Views;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Mobile.Views;
 using Xamarin.Forms;
 
 namespace Mobile.ViewModels
@@ -42,8 +38,9 @@ namespace Mobile.ViewModels
 
             try
             {
-                await _service.GetAll<dynamic>(null);
-                Application.Current.MainPage = new MainPage();                
+                //await _service.GetAll<dynamic>(null);
+                await _service.GetById<dynamic>(0);
+                Application.Current.MainPage = new MainPage();
             }
             catch (Exception)
             {

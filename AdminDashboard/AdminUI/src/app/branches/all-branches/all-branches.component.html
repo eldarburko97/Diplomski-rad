@@ -1,0 +1,20 @@
+<div class="container pt-5">
+  <input id="searchQueryInput" [(ngModel)]="search" (input)="onInput()" type="text" placeholder="Search by name"  style="width: 100%;">
+  <table class="table mt-5" style="background-color: #fff; text-align: center; ">
+    <caption style="color: #333; font-weight: bold;">List of branches</caption>
+    <thead>
+      <tr>
+        <th scope="col">Id</th>
+        <th scope="col">Name</th>
+        <th scope="col">Title</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="branch" *ngFor="let branch of branches" style="cursor: pointer" (click)="navigate(branch)">
+        <th scope="row">{{branch.branchID}}</th>
+        <td>{{branch.name}}</td>
+        <td>{{branch.title}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

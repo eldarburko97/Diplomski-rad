@@ -1,0 +1,51 @@
+<div class="container">
+  <div class="photo" style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
+    <img [src]="domSanitizer.bypassSecurityTrustResourceUrl('data:image/png;base64,'+ clientImage)" class="rounded-circle" alt="..." style="width: 100%; height: 70%;">
+  </div>
+  <div class="info">
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="FirstName">First name:</label>
+          <input [(ngModel)]="client.firstName" type="text" readonly class="form-control" id="FirstName" name="firstName" #firstName="ngModel">
+        </div>
+        <div class="form-group col-md-6">
+          <label for="LastName">Last name:</label>
+          <input [(ngModel)]="client.lastName" type="text" readonly class="form-control" id="LastName" name="lastName" #lastName="ngModel">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="Username">Username:</label>
+          <input [(ngModel)]="client.username" type="text" readonly class="form-control" id="Username" name="username" #username="ngModel">
+        </div>
+        <div class="form-group col-md-6">
+          <label for="Phone">Phone:</label>
+          <input [(ngModel)]="client.phone" type="text" readonly class="form-control" id="Phone" name="phone" #phone="ngModel">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="Email">Email:</label>
+          <input [(ngModel)]="client.email" type="text" readonly class="form-control" id="Email" name="email" #email="ngModel">
+        </div>
+        <div class="form-group col-md-6">
+          <label for="Address">Address:</label>
+          <input [(ngModel)]="client.address" type="text" readonly class="form-control" id="Address" name="address">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="Gender">Gender:</label>
+          <input [(ngModel)]="client.gender.type" type="text" readonly class="form-control" id="Gender" name="gender" #gender="ngModel">
+        </div>
+        <div class="form-group col-md-6">
+          <label for="City">City:</label>
+          <input [(ngModel)]="client.city.name" type="text" readonly class="form-control" id="City" name="city" #city="ngModel">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="BirthDate">Birth date:</label>
+        <input value="{{client.birthDate | date: 'dd/MM/yyyy'}}" type="text" readonly  id="BirthDate" name="birthDate" class="form-control">
+      </div>
+  </div>
+</div>

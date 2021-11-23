@@ -1,12 +1,9 @@
-﻿using AutoMapper;
-using eDentalClinic.Model;
+﻿using System.Collections.Generic;
+using System.Linq;
+using AutoMapper;
 using eDentalClinic.Model.Requests;
 using eDentalClinicWebAPI.Database;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace eDentalClinicWebAPI.Services
 {
@@ -39,12 +36,12 @@ namespace eDentalClinicWebAPI.Services
                 query = query.Where(w => w.Treatment.Name.StartsWith(searchRequest.Treatment));
             }
 
-            if(searchRequest != null && searchRequest.DateFrom != null && searchRequest.DateTo != null)
+            if (searchRequest != null && searchRequest.DateFrom != null && searchRequest.DateTo != null)
             {
                 query = query.Where(w => w.Date >= searchRequest.DateFrom.Value.Date && w.Date <= searchRequest.DateTo.Value.Date);
             }
 
-            if(searchRequest != null && searchRequest.UserID != 0)
+            if (searchRequest != null && searchRequest.UserID != 0)
             {
                 query = query.Where(w => w.UserID == searchRequest.UserID);
             }

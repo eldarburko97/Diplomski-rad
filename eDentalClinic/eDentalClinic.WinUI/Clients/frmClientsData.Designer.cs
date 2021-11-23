@@ -119,6 +119,7 @@
             this.BirthDate});
             this.dgvClients.Location = new System.Drawing.Point(136, 355);
             this.dgvClients.Name = "dgvClients";
+            this.dgvClients.RowHeadersWidth = 51;
             this.dgvClients.RowTemplate.Height = 24;
             this.dgvClients.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvClients.Size = new System.Drawing.Size(1008, 284);
@@ -129,44 +130,58 @@
             // 
             this.UserID.DataPropertyName = "UserID";
             this.UserID.HeaderText = "UserID";
+            this.UserID.MinimumWidth = 6;
             this.UserID.Name = "UserID";
             this.UserID.Visible = false;
+            this.UserID.Width = 125;
             // 
             // FirstName
             // 
             this.FirstName.DataPropertyName = "FirstName";
             this.FirstName.HeaderText = "First name";
+            this.FirstName.MinimumWidth = 6;
             this.FirstName.Name = "FirstName";
+            this.FirstName.Width = 125;
             // 
             // LastName
             // 
             this.LastName.DataPropertyName = "LastName";
             this.LastName.HeaderText = "Last name";
+            this.LastName.MinimumWidth = 6;
             this.LastName.Name = "LastName";
+            this.LastName.Width = 125;
             // 
             // Phone
             // 
             this.Phone.DataPropertyName = "Phone";
             this.Phone.HeaderText = "Phone";
+            this.Phone.MinimumWidth = 6;
             this.Phone.Name = "Phone";
+            this.Phone.Width = 125;
             // 
             // Email
             // 
             this.Email.DataPropertyName = "Email";
             this.Email.HeaderText = "Email";
+            this.Email.MinimumWidth = 6;
             this.Email.Name = "Email";
+            this.Email.Width = 125;
             // 
             // Address
             // 
             this.Address.DataPropertyName = "Address";
             this.Address.HeaderText = "Address";
+            this.Address.MinimumWidth = 6;
             this.Address.Name = "Address";
+            this.Address.Width = 125;
             // 
             // BirthDate
             // 
             this.BirthDate.DataPropertyName = "BirthDate";
             this.BirthDate.HeaderText = "Birth date";
+            this.BirthDate.MinimumWidth = 6;
             this.BirthDate.Name = "BirthDate";
+            this.BirthDate.Width = 125;
             // 
             // frmClientsData
             // 

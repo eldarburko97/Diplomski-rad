@@ -1,0 +1,48 @@
+<div class="container">
+  <div class="photo" style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
+    <img *ngIf="!imageExist" src={{treatmentImage}} class="rounded-circle" alt="..." style="width: 100%; height: 50%;">
+    <img *ngIf="imageExist && !img"
+      [src]="domSanitizer.bypassSecurityTrustResourceUrl('data:image/jpeg;base64,'+ treatmentImage)"
+      class="rounded-circle" alt="..." style="width: 100%; height: 50%;">
+      <!-- <img *ngIf="img" [src]="url" class="rounded-circle" alt="..." style="width: 100%; height: 50%;"> -->
+      <img *ngIf="imageExist && img" src={{treatmentImage}} class="rounded-circle" alt="..." style="width: 100%; height: 50%;">
+      <label class="custom-file-upload mt-3 form-control text-center btn btn-primary">
+      <input type="file" (change)="onFileSelected($event)" />
+      Upload
+    </label>
+    <span *ngIf="fileChosen; else elseBlock">{{fileName}}</span>
+    <ng-template #elseBlock>No file chosen</ng-template>
+  </div>
+  <div class="info" style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
+    <form #form="ngForm" (submit)="onSubmit(form); " autocomplete="off" style="width: 100%;">
+      <input type="hidden" id="treatmentID" name="treatmentID" [(ngModel)]="treatment.treatmentID">
+      <div class="form-row" style="width: 100%; margin: 0;">
+        <div class="form-group col-md-6" style="padding:0">
+          <label for="Name" [class.invalid-label]="name.invalid">First name:</label>
+          <input [(ngModel)]="treatment.name" type="text" class="form-control" id="Name" name="Name" #name="ngModel"
+            placeholder="Name" required  [class.is-invalid]="name.invalid && name.touched" [class.is-valid]="name.valid">
+        </div>
+        <div class="form-group col-md-6" style="padding-right: 0;">
+          <label for="price">Price:</label>
+          <input [(ngModel)]="treatment.price" type="number" class="form-control" id="Price" name="price" #price="ngModel" required
+            placeholder="Price" [class.is-invalid]="price.invalid && price.touched" [class.is-valid]="price.valid">
+            <!-- <span class="invalid-feedback" *ngIf="lastName.invalid && lastName.touched">Last name is
+              required</span> -->
+        </div>
+      </div>
+      <div class="form-row" style="padding-left: 5px; padding-right: 5px;">
+        <!-- <div class="form-group col-md-6"> -->
+          <label for="timeRequired">Time required:</label>
+          <input [(ngModel)]="treatment.timeRequired" type="number" class="form-control" id="timeRequired" name="timeRequired" #timeRequired="ngModel" required
+            placeholder="Time required" [class.is-invalid]="timeRequired.invalid && timeRequired.touched" [class.is-valid]="timeRequired.valid" style="text-align: center;">
+            <!-- <span class="invalid-feedback" *ngIf="phone.invalid && phone.touched">Phone is
+              required</span> -->
+        <!-- </div> -->
+      </div>
+      <div class="form-group" style="margin-bottom: 0; margin-top: 36px;">
+        <button type="submit" class="btn btn-primary form-control">Save</button>
+      </div>
+      <!-- <button type="submit" class="btn btn-primary">Sign in</button> -->
+    </form>
+  </div>
+</div>

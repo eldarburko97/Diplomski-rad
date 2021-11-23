@@ -1,0 +1,23 @@
+<div class="container pt-3">
+  <input id="searchQueryInput" type="text" placeholder="Search" value="" style="width: 100%;">
+  <div class="card-deck">
+    <div [ngClass]="'card'" *ngFor="let item of collection | paginate: {
+    itemsPerPage: 3,
+    currentPage: p,
+    totalItems: total }" class="pagination" style="margin-top: 80px;">
+      <a [routerLink]="['../dentist-info', item.dentistID]">
+        <img [src]="domSanitizer.bypassSecurityTrustResourceUrl('data:image/png;base64,'+ item.image)" class="card-img-top rounded-circle mx-auto d-block pt-1" alt="eee"
+          style="height: 200px; width: 200px;">
+        <div class="card-body">
+          <h5 class="card-title text-center">{{item.firstName + ' ' + item.lastName}}</h5>
+          <p class="card-text text-center">{{item.branch.title}}</p>
+          <p class="card-text text-center" *ngIf="item.active; else elseBlock">Active</p>
+          <ng-template #elseBlock>
+            <p class="card-text text-center">Inactive</p>
+          </ng-template>
+        </div>
+      </a>
+    </div>
+  </div>
+  <pagination-controls class="text-left my-pagination text-right" (pageChange)="p = $event"></pagination-controls>
+</div>

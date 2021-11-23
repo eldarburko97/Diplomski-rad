@@ -1,0 +1,16 @@
+<div class="container" style="position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);">
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label>Title:</label>
+      <input [(ngModel)]="notification.title" type="text" readonly class="form-control" id="Title" name="title" #title="ngModel">
+    </div>
+    <div class="form-group col-md-6">
+      <label>Date:</label>
+      <input value="{{notification.notificationDate | date: 'MM/dd/yyyy'}}"  type="text" readonly class="form-control" id="NotificationDate" name="notificationDate">
+    </div>
+  </div>
+  <div class="form-group">
+    <label>Text:</label>
+    <textarea cols="30" rows="10" [(ngModel)]="notification.text" type="text" readonly id="Text" name="text" class="form-control" #text="ngModel"> </textarea>
+  </div>
+</div>

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 
 namespace eDentalClinicWebAPI.Controllers
@@ -26,7 +23,7 @@ namespace eDentalClinicWebAPI.Controllers
 
         // POST api/values
         [HttpPost]
-        public void Post([FromBody] string value)
+        public void Post([FromForm] eDentalClinic.Model.DentistAddDTO dentist)
         {
         }
 

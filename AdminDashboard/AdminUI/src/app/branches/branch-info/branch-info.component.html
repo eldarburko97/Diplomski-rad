@@ -1,0 +1,32 @@
+<div class="container" style="position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);">
+  <!-- <div *ngIf="createBranchForm.invalid" class="alert alert-danger" role="alert">
+    This is a danger alert—check it out!
+  </div> -->
+  <form #form="ngForm" (submit)="onSubmit()" autocomplete="off">
+    <input type="hidden" id="branchID" name="branchID" [(ngModel)]="branch.branchID">
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="name" [class.invalid-label]="name.invalid">Name:</label>
+      <input [(ngModel)]="branch.name" type="text" class="form-control" id="name" name="name" #name="ngModel"
+        placeholder="Name" required [class.is-invalid]="name.invalid && name.touched" [class.is-valid]="name.valid">
+    </div>
+    <div class="form-group col-md-6">
+      <label for="title">Title:</label>
+      <input [(ngModel)]="branch.title" type="text" class="form-control" id="title" name="title" #title="ngModel"
+        required placeholder="Title" [class.is-invalid]="title.invalid && title.touched" [class.is-valid]="title.valid">
+    </div>
+  </div>
+  <div class="form-row" style=" display: flex; justify-content: center;">
+    <div class="form-group col-md-6" style="border: 1px solid #ced4da; display: flex; flex-direction: column; align-items: center;"  >
+      <label style="font-weight: bold;">Treatments:</label>
+        <div *ngFor="let treatment of checkedTreatments" style="width: 100%;">
+            <!-- <input type="checkbox" data-eldarid="12" data-="" value="{{treatment.treatmentID}}" checked=> {{treatment.name}} -->
+            <input type="checkbox" value="{{treatment.treatmentID}}" [checked]="treatment.checked" (change)="updateCheckedTreatments($event)"> {{treatment.name}}
+        </div>
+    </div>
+  </div>
+  <div class="form-group">
+    <button type="submit" class="btn btn-primary form-control">Save</button>
+  </div>
+  </form>
+</div>

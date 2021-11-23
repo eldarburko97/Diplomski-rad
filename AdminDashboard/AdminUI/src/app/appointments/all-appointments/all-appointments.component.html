@@ -1,0 +1,37 @@
+<div class="container">
+  <div class="form-row pt-5">
+    <div class="form-group col-md-6">
+      <label for="startDate">Start date:</label>
+      <input [(ngModel)]="startDate" type="text" class="form-control" id="startDate" name="startDate" bsDatepicker
+        [bsConfig]="datePickerConfig" placeholder="Start date">
+    </div>
+    <div class="form-group col-md-6">
+      <label for="endDate">End date:</label>
+      <input [(ngModel)]="endDate" type="text" class="form-control" id="endDate" name="endDate" bsDatepicker
+        [bsConfig]="datePickerConfig" placeholder="End date">
+    </div>
+    <button class="btn btn-primary" style="margin: 0 auto; display: block;"
+      (click)="searchAppointments()">Search</button>
+  </div>
+  <table class="table mt-5" style="background-color: #fff; text-align: center; ">
+    <caption style="color: #333; font-weight: bold;">List of appointments</caption>
+    <thead>
+      <tr>
+        <th scope="col">Start date</th>
+        <th scope="col">End date</th>
+        <th scope="col">Client</th>
+        <th scope="col">Dentist</th>
+        <th scope="col">Treatment</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="treatment" *ngFor="let appointment of appointments" style="cursor: pointer">
+        <th scope="row">{{appointment.startDate | date: 'MM/dd/yyyy'}} {{appointment.startDate | date: "HH:mm"}}</th>
+        <th scope="row">{{appointment.endDate | date: 'MM/dd/yyyy'}} {{appointment.endDate | date: "HH:mm"}}</th>
+        <th scope="row">{{appointment.user.firstName + " " + appointment.user.lastName}}</th>
+        <th scope="row">{{appointment.dentist.firstName + " " + appointment.dentist.lastName}}</th>
+        <th scope="row">{{appointment.treatment.name}}</th>
+      </tr>
+    </tbody>
+  </table>
+</div>
