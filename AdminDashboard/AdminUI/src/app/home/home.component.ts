@@ -1,14 +1,20 @@
 import { Component, OnInit } from "@angular/core";
+import { Appointment } from "../models/appointment.model";
+import { AppointmentService } from "../services/appointment.service";
+import { DentistService } from "../services/dentist.service";
+import { PaymentService } from "../services/payment.service";
+import { UserService } from "../services/user.service";
 
 
 @Component({
   selector: "app-home",
   templateUrl: "./home.component.html",
   styleUrls: ["./home.component.css"],
+  providers: [DentistService, UserService, AppointmentService, PaymentService]
 })
 export class HomeComponent implements OnInit {
   showHomeMain: boolean;
-  constructor() {}
+  constructor(private _dentistService: DentistService, private _clientService: UserService, private _appointmentService: AppointmentService, _paymentService: PaymentService) {}
 
   ngOnInit() {
     this.Collapse();

@@ -11,20 +11,19 @@ import { BranchService } from 'src/app/services/branch.service';
 })
 export class AllBranchesComponent implements OnInit {
   branches: Branch[];
-  search: string;
+  name: string = "";
   constructor(private _branchService: BranchService, private _router: Router) { }
 
   ngOnInit() {
     this._branchService.getBranches().subscribe(res => this.branches = res, err => console.log(err));
-    console.log(this.search);
   }
 
   navigate(branch: Branch) {
     this._router.navigate([`/home/branch-info/${branch.branchID}`]);
   }
 
- onInput() {
-   this._branchService.searchBranches(this.search, this.search).subscribe(res => this.branches = res);
+ search() {
+   this._branchService.searchBranches(this.name).subscribe(res => this.branches = res);
  }
 
 }

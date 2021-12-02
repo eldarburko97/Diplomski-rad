@@ -16,6 +16,7 @@ export class AllTreatmentsComponent implements OnInit {
   err: any;
   collection: Treatment[];
   imageUrl:string;
+  name: string = "";
   constructor(private _treatmentService: TreatmentService, private _router: Router, public domSanitizer: DomSanitizer) { }
 
   ngOnInit() {
@@ -26,6 +27,11 @@ export class AllTreatmentsComponent implements OnInit {
     let imageBase64String = btoa(imageBinary);
     this.imageUrl = "data:image/PNG;base64," + imageBase64String;
     return this.imageUrl;
+  }
+
+  search() {
+    this.collection = [];
+    this._treatmentService.searchTreatments(this.name).subscribe(res => this.collection = res, err => console.log(err));
   }
 
 }

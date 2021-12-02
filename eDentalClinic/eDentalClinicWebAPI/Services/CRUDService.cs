@@ -34,6 +34,11 @@ namespace eDentalClinicWebAPI.Services
             return _mapper.Map<T>(entity);
         }
 
+        public int GetCount()
+        {
+            return _context.Set<TDatabase>().Count();
+        }
+
         public virtual T Insert(TInsert model)
         {
             var entity = _mapper.Map<TDatabase>(model);

@@ -14,5 +14,6 @@ namespace eDentalClinicWebAPI.Services
         User Insert(UserInsertRequest request);
         User Update(int id, UserInsertRequest request);
         User Authenticate(string username, string password);
+
     }
 }

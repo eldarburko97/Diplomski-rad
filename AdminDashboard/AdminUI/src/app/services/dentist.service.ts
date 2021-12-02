@@ -1,4 +1,4 @@
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { HttpHeaders } from "@angular/common/http";
@@ -57,5 +57,14 @@ export class DentistService {
     return this.httpClient.post(this.rootURL, dentist, this.headerOptions);
   }
 
+  searchDentists(firstName: string, lastName: string): Observable<Dentist[]> {
+    const params = new HttpParams()
+    .set('firstName', firstName)
+    .set('lastName', lastName);
+    return this.httpClient.get<Dentist[]>(this.rootURL, {headers: new HttpHeaders({
+      "Content-Type": "application/json",
+      Authorization: this.authorizationData,
+    }), params: params});
+  }
 
 }

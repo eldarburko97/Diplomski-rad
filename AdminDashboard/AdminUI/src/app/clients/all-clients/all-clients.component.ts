@@ -15,8 +15,8 @@ export class AllClientsComponent implements OnInit {
   err: any;
   collection: User[] = [];
   imageUrl:string;
-  firstName: string;
-  lastName: string;
+  firstName: string = "";
+  lastName: string = "";
 
   constructor(private _userService: UserService, public domSanitizer: DomSanitizer) { }
 
@@ -44,7 +44,16 @@ export class AllClientsComponent implements OnInit {
   }
 
   searchClients() {
-
+    this.collection = [];
+    this._userService.searchUsers(this.firstName, this.lastName).subscribe(res => {
+      for(let i = 0; i < res.length; i++) {
+        for(let j = 0; j < res[i].userRoles.length; j++) {
+          if(res[i].userRoles[j].role.name == "Client") {
+            this.collection.push(res[i]);
+        }
+        }
+      }
+    }, err => console.log(err));
   }
 
 }

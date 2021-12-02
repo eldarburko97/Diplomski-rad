@@ -1,5 +1,5 @@
 <div class="container pt-3">
-  <input id="searchQueryInput" type="text" placeholder="Search" value="" style="width: 100%;">
+  <input id="searchQueryInput" [(ngModel)]="name" type="text" (input)="search()" placeholder="Search by treatment name" value="" style="width: 100%;">
   <div class="card-deck">
     <div [ngClass]="'card'" *ngFor="let item of collection | paginate: {
     itemsPerPage: 3,

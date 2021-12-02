@@ -1,4 +1,4 @@
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { HttpHeaders } from "@angular/common/http";
@@ -7,7 +7,7 @@ import { Treatment } from "../models/treatment.model";
 
 @Injectable()
 export class TreatmentService {
-  readonly rootURL = 'http://localhost:62292/api/Dentists';
+  readonly rootURL = 'http://localhost:62292/api/Treatments';
   formData: Treatment;
   authorizationData = "Basic " + btoa("desktop" + ":" + "test");
 
@@ -57,5 +57,13 @@ export class TreatmentService {
     return this.httpClient.post(this.rootURL, dentist, this.headerOptions);
   }
 
+  searchTreatments(name: string): Observable<Treatment[]> {
+    const params = new HttpParams()
+    .set('name', name);
+    return this.httpClient.get<Treatment[]>(this.rootURL, {headers: new HttpHeaders({
+      "Content-Type": "application/json",
+      Authorization: this.authorizationData,
+    }), params: params});
+  }
 
 }

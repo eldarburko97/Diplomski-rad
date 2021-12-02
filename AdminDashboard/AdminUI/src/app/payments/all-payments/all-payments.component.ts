@@ -13,10 +13,10 @@ export class AllPaymentsComponent implements OnInit {
   search: string;
   payments: Payment[];
   datePickerConfig: Partial<BsDatepickerConfig>;
-  dateFrom: Date = null;
-  dateTo: Date = null;
-  firstName: string;
-  lastName: string;
+  dateFrom: Date = new Date();
+  dateTo: Date = new Date();
+  firstName: string = "";
+  lastName: string = "";
   constructor(private _paymentService: PaymentService) {
     this.datePickerConfig = Object.assign({}, {containerClass: 'theme-dark-blue', showWeekNumbers: false, dateInputFormat: 'YYYY/MM/DD'});
   }

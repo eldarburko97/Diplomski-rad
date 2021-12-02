@@ -26,10 +26,9 @@ export class BranchService {
     return this.httpClient.get<Branch[]>(this.rootURL, this.headerOptions);
   }
 
-  searchBranches(name: string, title: string): Observable<Branch[]> {
+  searchBranches(name: string): Observable<Branch[]> {
     const params = new HttpParams()
-    .set('name', name)
-    .set('title', title);
+    .set('name', name);
     return this.httpClient.get<Branch[]>(this.rootURL, {headers: new HttpHeaders({
       "Content-Type": "application/json",
       Authorization: this.authorizationData,

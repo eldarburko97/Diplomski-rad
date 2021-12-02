@@ -1,0 +1,148 @@
+.card-box {
+  position: relative;
+  width: 100%;
+  padding: 20px;
+  display: grid;
+  grid-template-columns: repeat(4,1fr);
+  grid-gap: 20px;
+}
+
+.card-box .card-content {
+  position: relative;
+  background: #fff;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+.card-box .card-content .numbers {
+  position: relative;
+  font-size: 2em;
+  font-weight: 500;
+}
+
+.card-box .card-content .card-name {
+  color: #999;
+}
+
+.card-box .card-content .icon-box {
+  font-size: 2em;
+  color: #01b2c6;
+}
+
+.details {
+  position: relative;
+  width: 100%;
+  padding: 20px;
+  padding-top: 0;
+}
+
+.details .recent-appointments {
+  position: relative;
+  min-height: 480px;
+  background: #fff;
+  padding: 20px;
+  width: 100%;
+}
+
+.card-heading h2 {
+  font-weight: 600;
+}
+
+.details table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+.details .recent-appointments table tr {
+  border-bottom: 1px solid rgba(0,0,0,0.1);
+}
+
+.details .recent-appointments table tbody tr:last-child {
+  border-bottom: none;
+}
+
+.details .recent-appointments table thead td {
+  font-weight: 600;
+}
+
+.details .recent-appointments table tbody tr:hover {
+  background:#01b2c6 ;
+  color: #fff;
+}
+
+.details .recent-appointments table tr td {
+  padding: 5px 5px;
+}
+
+.details .recent-appointments table thead tr td:nth-child(2), .details .recent-appointments table thead tr td:nth-child(3) {
+  text-align: center;
+}
+
+.details .recent-appointments table thead tr td:last-child {
+  text-align: right;
+}
+
+.details .recent-appointments table tbody tr td:last-child {
+  text-align: right;
+}
+
+.details .recent-appointments table tbody tr td:nth-child(2), .details .recent-appointments table tbody tr td:nth-child(3) {
+  text-align: center;
+}
+
+
+
+/* Media queries */
+
+@media (max-width: 992px){
+  .card-box {
+      grid-template-columns: repeat(2,1fr);
+  }
+}
+
+@media (max-width: 480px){
+  .card-box {
+      grid-template-columns: repeat(1,1fr);
+  }
+
+  .details .recent-appointments {
+      overflow-x: auto;
+  }
+
+  .details .recent-appointments table {
+      width: 750px;
+  }
+}
+
+@media (max-width: 360px){
+  .details .recent-appointments table {
+      width: 685px;
+  }
+
+  .details .recent-appointments .card-heading h2 {
+      font-size: 25px;
+  }
+
+  .details .recent-appointments table tbody {
+      font-size: 15px;
+  }
+}
+
+@media (max-width: 376px) {
+  .details .recent-appointments .card-heading h2 {
+      font-size: 25px;
+  }
+}
+
+@media (max-width: 320px){
+  .details .recent-appointments .card-heading h2 {
+      font-size: 20px;
+  }
+
+  .details .recent-appointments table tbody {
+      font-size: 13px;
+  }
+}

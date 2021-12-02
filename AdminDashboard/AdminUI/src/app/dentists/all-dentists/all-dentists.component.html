@@ -1,5 +1,14 @@
 <div class="container pt-3">
-  <input id="searchQueryInput" type="text" placeholder="Search" value="" style="width: 100%;">
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <input [(ngModel)]="firstName" type="text" class="form-control searchQueryInput" id="FirstName" name="firstName" placeholder="First name">
+    </div>
+    <div class="form-group col-md-6">
+      <input [(ngModel)]="lastName" type="text" class="form-control searchQueryInput" id="LastName" name="lastName" placeholder="Last name">
+    </div>
+    <button class="btn btn-primary" style="margin: 0 auto; display: block;"
+      (click)="searchDentists()">Search</button>
+  </div>
   <div class="card-deck">
     <div [ngClass]="'card'" *ngFor="let item of collection | paginate: {
     itemsPerPage: 3,

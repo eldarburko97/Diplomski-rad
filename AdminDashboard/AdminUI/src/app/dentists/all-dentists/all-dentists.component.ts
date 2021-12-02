@@ -15,6 +15,8 @@ export class AllDentistsComponent implements OnInit {
   err: any;
   collection: Dentist[];
   imageUrl:string;
+  firstName:string = "";
+  lastName:string = "";
 
   constructor(private _dentistService: DentistService, public domSanitizer: DomSanitizer) {}
 
@@ -56,6 +58,11 @@ export class AllDentistsComponent implements OnInit {
     let imageBase64String = btoa(imageBinary);
     this.imageUrl = "data:image/PNG;base64," + imageBase64String;
     return this.imageUrl;
+  }
+
+  searchDentists() {
+    this.collection = [];
+    this._dentistService.searchDentists(this.firstName, this.lastName).subscribe(res => this.collection = res, err => console.log(err));
   }
 
 

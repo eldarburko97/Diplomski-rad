@@ -12,5 +12,6 @@ namespace eDentalClinicWebAPI.Services
         T Insert(TInsert model);
         T Update(int id, TUpdate model);
         T Delete(int id);
+        int GetCount();
     }
 }

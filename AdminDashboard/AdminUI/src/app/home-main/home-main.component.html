@@ -1,3 +1,64 @@
-<p>
-  home-main works!
-</p>
+<div class="card-box">
+  <div class="card-content">
+    <div>
+      <div class="numbers">{{dentists}}</div>
+      <div class="card-name">Dentists</div>
+    </div>
+    <div class="icon-box">
+      <i class="fas fa-user-md"></i>
+    </div>
+  </div>
+  <div class="card-content">
+    <div>
+      <div class="numbers">{{clients}}</div>
+      <div class="card-name">Clients</div>
+    </div>
+    <div class="icon-box">
+      <i class="fas fa-users"></i>
+    </div>
+  </div>
+  <div class="card-content">
+    <div>
+      <div class="numbers">{{appointments}}</div>
+      <div class="card-name">Appointments</div>
+    </div>
+    <div class="icon-box">
+      <i class="fas fa-calendar-alt"></i>
+    </div>
+  </div>
+  <div class="card-content">
+    <div>
+      <div class="numbers">{{ earnings | currency:'USD':'symbol' }}</div>
+      <div class="card-name">Earnings</div>
+    </div>
+    <div class="icon-box">
+      <i class="fas fa-dollar-sign"></i>
+    </div>
+  </div>
+</div>
+
+<div class="details">
+  <div class="recent-appointments">
+    <div class="card-heading">
+      <h2>Recent appointments</h2>
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <td>Appointment date</td>
+          <td>Treatment</td>
+          <td>Dentist</td>
+          <td>Client</td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let appointment of recentAppointments">
+          <td>{{appointment.startDate | date:'short'}} - {{appointment.endDate | date:'short'}}</td>
+          <td>{{appointment.treatment}}</td>
+          <td>{{appointment.dentist}}</td>
+          <td>{{appointment.client}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
