@@ -51,6 +51,7 @@ namespace eDentalClinicWebAPI
 
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IDashboardService, DashboardService>();
+            services.AddScoped<IReportService, ReportService>();
             services.AddScoped<IDentalClinicService, DentalClinicService>();
             services.AddScoped<IRecommendationService, RecommendationService>();
             services.AddScoped<ICRUDService<eDentalClinic.Model.Branch, BranchSearchRequest, BranchInsertRequest, BranchInsertRequest>, BranchService>();

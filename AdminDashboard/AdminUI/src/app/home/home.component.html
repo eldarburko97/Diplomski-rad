@@ -89,10 +89,18 @@
         </a>
       </li> -->
       <li>
-        <a href="#">
+        <a class="collapsible">
           <span class="icon"><i class="fas fa-chart-bar"></i></span>
           <span class="title">Reports</span>
         </a>
+        <div class="content">
+          <a routerLink="all-payments" style="padding: 10px 0px; justify-content: center;">
+             - Best selling treatment
+          </a>
+          <a routerLink="add-payment" style="padding: 10px 0px; justify-content: center;">
+            - Dentist report
+         </a>
+      </div>
       </li>
       <li>
         <a routerLink="../login">
@@ -230,6 +238,10 @@
       </div>
     </div> -->
   </div>
+</div>
+
+<div>
+  <canvas id="mainBarChartCanvas" class="w-50 h-50"></canvas>
 </div>
 
 <!-- <script>
