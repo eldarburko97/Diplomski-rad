@@ -17,10 +17,10 @@ namespace eDentalClinicWebAPI.Controllers
             _service = service;
         }
 
-        [HttpGet]
+        [HttpGet("get-business-report-dentists")]
         public List<BusinessReportDentist> GetBusinessReportDentists(DateTime startDate, DateTime endDate)
         {
-            return _service.GetBusinessReportDentists(startDate, endDate);
+            return _service.GetBusinessReportDentists(new DateTime(2021,02,08), new DateTime(2021,03,08));
         }
 
         [HttpGet("get-best-selling-treatment")]

@@ -1,9 +1,11 @@
 import { Component, OnInit } from "@angular/core";
-import Chart from 'chart.js/auto';
+import Chart from 'chart.js';
 import { Appointment } from "../models/appointment.model";
+import { BusinessReportDentist } from "../models/businessReportDentist.model";
 import { AppointmentService } from "../services/appointment.service";
 import { DentistService } from "../services/dentist.service";
 import { PaymentService } from "../services/payment.service";
+import { ReportService } from "../services/report.service";
 import { UserService } from "../services/user.service";
 
 
@@ -11,15 +13,19 @@ import { UserService } from "../services/user.service";
   selector: "app-home",
   templateUrl: "./home.component.html",
   styleUrls: ["./home.component.css"],
-  providers: [DentistService, UserService, AppointmentService, PaymentService]
+  providers: [DentistService, UserService, AppointmentService, PaymentService, ReportService]
 })
 export class HomeComponent implements OnInit {
   showHomeMain: boolean;
-  constructor(private _dentistService: DentistService, private _clientService: UserService, private _appointmentService: AppointmentService, _paymentService: PaymentService) {}
+  constructor(private _dentistService: DentistService,
+     private _clientService: UserService,
+      private _appointmentService: AppointmentService,
+       _paymentService: PaymentService,
+       private _reportService: ReportService) {}
 
   ngOnInit() {
     this.Collapse();
-    this.createNetPositionsChart();
+    this._reportService.getBusinessReportDentists().subscribe(res => this.createNetPositionsChart(res), err => console.log(err));
   }
 
 
@@ -49,7 +55,7 @@ export class HomeComponent implements OnInit {
     }
   }
 
-  createNetPositionsChart(): void {
+  createNetPositionsChart(model: BusinessReportDentist[]): void {
     const canvas = <HTMLCanvasElement>(
         document.getElementById("mainBarChartCanvas")
     );
@@ -57,14 +63,15 @@ export class HomeComponent implements OnInit {
     var myChart = new Chart(ctx, {
     type: 'bar',
     data: {
-        labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+        labels: model.map((x) => x.name),
         datasets: [{
-            label: '# of Votes',
-            data: [12, 19, 3, 5, 2, 3],
+            label: 'Total appointments',
+            // data:  model.map((x) => x.totalAppointments),
+            data:  [10,2,3,4,5],
             backgroundColor: [
                 'rgba(255, 99, 132, 0.2)',
                 'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
                 'rgba(75, 192, 192, 0.2)',
                 'rgba(153, 102, 255, 0.2)',
                 'rgba(255, 159, 64, 0.2)'

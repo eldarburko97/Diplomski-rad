@@ -85,7 +85,7 @@ namespace eDentalClinicWebAPI
             //  app.UseHttpsRedirection();
 
             app.UseCors(options =>
-           options.WithOrigins("http://localhost:62292")
+           options.WithOrigins("http://localhost:62292", "http://localhost:4200")
            .AllowAnyOrigin()
            .AllowAnyMethod()
            .AllowAnyHeader());
