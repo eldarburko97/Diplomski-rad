@@ -30,14 +30,14 @@ export class BestSellingTreatmentComponent implements OnInit {
     this._reportService
       .getBestSellingTreatment(this.startDate, this.endDate)
       .subscribe(
-        (res) => {this.createNetPositionsChart(res), console.log(res)},
+        (res) => {this.createBestSellingTreatmentChart(res), console.log(res)},
         (err) => console.log(err)
       );
   }
 
-  createNetPositionsChart(model: BestSellingTreatment[]): void {
+  createBestSellingTreatmentChart(model: BestSellingTreatment[]): void {
     const canvas = <HTMLCanvasElement>(
-      document.getElementById("mainBarChartCanvas")
+      document.getElementById("bestSellingTreatmentCanvas")
     );
     const ctx = canvas.getContext("2d");
     var myChart = new Chart(ctx, {
@@ -48,49 +48,28 @@ export class BestSellingTreatmentComponent implements OnInit {
           {
             label: "Total treatments",
             data:  model.map((x) => x.number),
-            // data: [10, 2, 3, 4, 5],
-            backgroundColor: [
-              "rgba(255, 99, 132, 0.2)",
-              "rgba(54, 162, 235, 0.2)",
-              "rgba(54, 162, 235, 0.2)",
-              "rgba(75, 192, 192, 0.2)",
-              "rgba(153, 102, 255, 0.2)",
-              "rgba(255, 159, 64, 0.2)",
-            ],
-            borderColor: [
-              "rgba(255,99,132,1)",
-              "rgba(54, 162, 235, 1)",
-              "rgba(255, 206, 86, 1)",
-              "rgba(75, 192, 192, 1)",
-              "rgba(153, 102, 255, 1)",
-              "rgba(255, 159, 64, 1)",
-            ],
+            backgroundColor: "#A2DDFF",
+            stack: "stack 0",
+            type: "bar",
+            borderWidth: 1,
+          },
+          {
+            label: "Total Profit",
+            data:  model.map((x) => x.total),
+            backgroundColor: "#FF9489",
+            stack: "stack 1",
+            type: "bar",
             borderWidth: 1,
           },
         ],
       },
       options: {
         scales: {
-          yAxis: {
-            stacked: true,
-            position: "left",
-            beginAtZero: true,
-            grid: {
-              color: "#E4E4E7",
-              borderDash: [25],
-              drawBorder: false,
-            },
+          yAxes: [{
             ticks: {
-              color: "#BBB",
-              callback: function (value) {
-                return value.toLocaleString("en-GB", {
-                  style: "currency",
-                  currency: "GBP",
-                  minimumFractionDigits: 0,
-                });
-              },
-            },
-          },
+                beginAtZero: true
+            }
+        }]
         },
       },
     });
@@ -100,7 +79,7 @@ export class BestSellingTreatmentComponent implements OnInit {
     this._reportService
       .getBestSellingTreatment(this.startDate, this.endDate)
       .subscribe(
-        (res) => { this.createNetPositionsChart(res); console.log(res)  },
+        (res) => { this.createBestSellingTreatmentChart(res); console.log(res)  },
         (err) => console.log(err)
       );
   }

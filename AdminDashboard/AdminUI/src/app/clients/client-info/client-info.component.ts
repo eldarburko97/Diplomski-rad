@@ -25,6 +25,7 @@ export class ClientInfoComponent implements OnInit {
   ngOnInit() {
     this.id = parseInt(this.route.snapshot.paramMap.get("clientID"));
     console.log(this.id);
-    this._clientService.getUser(this.id).subscribe(res => this.client = res, err => console.log(err), () => this.clientImage = this.client.image);
+    this._clientService.getUser(this.id).subscribe(res => this.client = res,
+       err => console.log(err), () => this.clientImage = this.client.image);
   }
 }

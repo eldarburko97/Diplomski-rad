@@ -30,14 +30,14 @@ export class BusinessReportDentistComponent implements OnInit {
     this._reportService
       .getBusinessReportDentists(this.startDate, this.endDate)
       .subscribe(
-        (res) => this.createNetPositionsChart(res),
+        (res) => this.createDentistChart(res),
         (err) => console.log(err)
       );
   }
 
-  createNetPositionsChart(model: BusinessReportDentist[]): void {
+  createDentistChart(model: BusinessReportDentist[]): void {
     const canvas = <HTMLCanvasElement>(
-      document.getElementById("mainBarChartCanvas")
+      document.getElementById("dentistChartCanvas")
     );
     const ctx = canvas.getContext("2d");
     var myChart = new Chart(ctx, {
@@ -47,12 +47,11 @@ export class BusinessReportDentistComponent implements OnInit {
         datasets: [
           {
             label: "Total appointments",
-            // data:  model.map((x) => x.totalAppointments),
-            data: [10, 2, 3, 4, 5],
+            data:  model.map((x) => x.totalAppointments),
             backgroundColor: [
               "rgba(255, 99, 132, 0.2)",
               "rgba(54, 162, 235, 0.2)",
-              "rgba(54, 162, 235, 0.2)",
+              "rgba(255, 206, 86, 0.2)",
               "rgba(75, 192, 192, 0.2)",
               "rgba(153, 102, 255, 0.2)",
               "rgba(255, 159, 64, 0.2)",
@@ -70,27 +69,17 @@ export class BusinessReportDentistComponent implements OnInit {
         ],
       },
       options: {
+        legend: {
+          labels: {
+            boxWidth: 0,
+          }
+         },
         scales: {
-          yAxis: {
-            stacked: true,
-            position: "left",
-            beginAtZero: true,
-            grid: {
-              color: "#E4E4E7",
-              borderDash: [25],
-              drawBorder: false,
-            },
+          yAxes: [{
             ticks: {
-              color: "#BBB",
-              callback: function (value) {
-                return value.toLocaleString("en-GB", {
-                  style: "currency",
-                  currency: "GBP",
-                  minimumFractionDigits: 0,
-                });
-              },
-            },
-          },
+                beginAtZero: true
+            }
+        }]
         },
       },
     });
@@ -100,7 +89,7 @@ export class BusinessReportDentistComponent implements OnInit {
     this._reportService
       .getBusinessReportDentists(this.startDate, this.endDate)
       .subscribe(
-        (res) => this.createNetPositionsChart(res),
+        (res) => this.createDentistChart(res),
         (err) => console.log(err)
       );
   }
