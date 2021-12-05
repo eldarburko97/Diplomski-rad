@@ -15,6 +15,8 @@ import { AllNotificationsComponent } from "./notifications/all-notifications/all
 import { NotificationInfoComponent } from "./notifications/notification-info/notification-info.component";
 import { AddPaymentComponent } from "./payments/add-payment/add-payment.component";
 import { AllPaymentsComponent } from "./payments/all-payments/all-payments.component";
+import { BestSellingTreatmentComponent } from "./reports/best-selling-treatment/best-selling-treatment.component";
+import { BusinessReportDentistComponent } from "./reports/business-report-dentist/business-report-dentist.component";
 import { AllTreatmentsComponent } from "./treatments/all-treatments/all-treatments.component";
 import { TreatmentInfoComponent } from "./treatments/treatment-info/treatment-info.component";
 
@@ -103,6 +105,14 @@ const routes: Routes = [
         path: "notification-info/:notificationID",
         component: NotificationInfoComponent,
         pathMatch: 'full'
+      },
+      {
+        path: "best-selling-treatment",
+        component: BestSellingTreatmentComponent
+      },
+      {
+        path: "business-report-dentist",
+        component: BusinessReportDentistComponent
       }
     ],
   },

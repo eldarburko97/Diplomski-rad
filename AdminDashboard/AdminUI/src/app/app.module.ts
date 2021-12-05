@@ -28,6 +28,8 @@ import { AddPaymentComponent } from './payments/add-payment/add-payment.componen
 import { AllPaymentsComponent } from './payments/all-payments/all-payments.component';
 import { AllNotificationsComponent } from './notifications/all-notifications/all-notifications.component';
 import { NotificationInfoComponent } from './notifications/notification-info/notification-info.component';
+import { BestSellingTreatmentComponent } from './reports/best-selling-treatment/best-selling-treatment.component';
+import { BusinessReportDentistComponent } from './reports/business-report-dentist/business-report-dentist.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +50,9 @@ import { NotificationInfoComponent } from './notifications/notification-info/not
     AddPaymentComponent,
     AllPaymentsComponent,
     AllNotificationsComponent,
-    NotificationInfoComponent
+    NotificationInfoComponent,
+    BestSellingTreatmentComponent,
+    BusinessReportDentistComponent
   ],
   imports: [
     BrowserModule,

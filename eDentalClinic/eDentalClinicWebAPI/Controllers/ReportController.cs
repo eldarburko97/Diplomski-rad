@@ -1,4 +1,5 @@
 ﻿using eDentalClinic.Model;
+using eDentalClinic.Model.Requests;
 using eDentalClinicWebAPI.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -18,15 +19,15 @@ namespace eDentalClinicWebAPI.Controllers
         }
 
         [HttpGet("get-business-report-dentists")]
-        public List<BusinessReportDentist> GetBusinessReportDentists(DateTime startDate, DateTime endDate)
+        public List<BusinessReportDentist> GetBusinessReportDentists([FromQuery] ReportSearchRequest request)
         {
-            return _service.GetBusinessReportDentists(new DateTime(2021,02,08), new DateTime(2021,03,08));
+            return _service.GetBusinessReportDentists(request);
         }
 
         [HttpGet("get-best-selling-treatment")]
-        public List<BestSellingTreatment> GetBestSellingTreatments(DateTime startDate, DateTime endDate)
+        public List<BestSellingTreatment> GetBestSellingTreatments([FromQuery] ReportSearchRequest request)
         {
-            return _service.GetBestSellingTreatments(startDate, endDate);
+            return _service.GetBestSellingTreatments(request);
         }
 
     }
