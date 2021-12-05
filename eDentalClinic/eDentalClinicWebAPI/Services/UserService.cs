@@ -5,6 +5,7 @@ using eDentalClinic.Model.Requests;
 using eDentalClinicWebAPI.Database;
 using eDentalClinicWebAPI.Filters;
 using eDentalClinicWebAPI.Helper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 
 namespace eDentalClinicWebAPI.Services
@@ -39,7 +40,6 @@ namespace eDentalClinicWebAPI.Services
             return _mapper.Map<eDentalClinic.Model.User>(entity);
         }
 
-        //[Authorize]
         public List<eDentalClinic.Model.User> GetAll(UserSearchRequest search)
         {
             var query = _context.Users.Include("UserRoles.Role").Include(i => i.Gender).Include(i => i.City).AsQueryable();

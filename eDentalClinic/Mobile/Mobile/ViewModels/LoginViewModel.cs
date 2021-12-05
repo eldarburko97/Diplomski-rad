@@ -38,8 +38,8 @@ namespace Mobile.ViewModels
 
             try
             {
-                //await _service.GetAll<dynamic>(null);
-                await _service.GetById<dynamic>(0);
+                 await _service.GetAll<dynamic>(null);
+                //await _service.GetById<dynamic>(0);
                 Application.Current.MainPage = new MainPage();
             }
             catch (Exception)

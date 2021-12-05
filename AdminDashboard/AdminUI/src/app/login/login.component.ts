@@ -14,40 +14,24 @@ import { CanActivate, CanActivateChild, Router, ActivatedRouteSnapshot, RouterSt
   providers: [UserService]
 })
 export class LoginComponent implements OnInit {
-  users: User[];
   username: string;
   password: string;
   err: any;
-  constructor(private _userService: UserService, private router: Router) {
+  user: User;
+  constructor(private _userService: UserService, private router: Router) {}
 
-  }
-
-  sendValuesIntoService(username: string, password: string) {
-    this._userService.setValues(username,password);
-  }
-
-  ngOnInit() {
-    // this._userService.getUsers().subscribe(usersData => this.users = usersData);
-  }
-
-  // login(): void {
-  //   this._userService.getUsers().subscribe(usersData => this.users = usersData);
-  //   console.log(this.users);
-  // }
+  ngOnInit() {}
 
     login(loginForm: NgForm): void {
-      // console.log(loginForm.value);
-      this.sendValuesIntoService(this.username,this.password);
-      this._userService.getUsers().subscribe(usersData => this.users = usersData,(error) => {
+      this._userService.username = this.username;
+      this._userService.password = this.password;
+      this._userService.getUser(1).subscribe(usersData => { this.user = usersData; console.log(usersData)},(error) => {
         this.err = error;
-        if(this.err) console.log(this.err); else console.log("Nema error");
       },
        () => {
-         if(this.users){
+         if(this.user){
           this.router.navigate(["/home"]);
          }
        });
-
-      // if(this.users) console.log("Ima usera"); else console.log("Prazna lista");
     }
 }

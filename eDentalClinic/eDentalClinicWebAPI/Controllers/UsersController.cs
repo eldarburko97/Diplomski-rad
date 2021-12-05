@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using eDentalClinic.Model;
 using eDentalClinic.Model.Requests;
 using eDentalClinicWebAPI.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -19,14 +20,14 @@ namespace eDentalClinicWebAPI.Controllers
         }
 
         [HttpGet]
-        //[Authorize(Roles = "Administrator")]
         public ActionResult<List<User>> GetAll([FromQuery] UserSearchRequest search)
         {
             return _service.GetAll(search);
         }
 
         [HttpGet("{userId}")]
-        //[Authorize(Roles = "Client")]
+        [Authorize]
+        //[Authorize(Roles = "Administrator")]
         public ActionResult<User> GetById(int userId)
         {
             return _service.GetById(userId);

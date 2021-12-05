@@ -7,14 +7,7 @@ import { HttpHeaders } from '@angular/common/http';
 @Injectable()
 export class UserService {
   readonly rootURL = 'http://localhost:62292/api/Users';
-  authorizationData = "Basic " + btoa("desktop" + ":" + "test");
 
-     headerOptions = {
-      headers: new HttpHeaders({
-        "Content-Type": "application/json",
-        Authorization: this.authorizationData,
-      }),
-    };
     /**
      *
      */
@@ -24,16 +17,30 @@ export class UserService {
 
     }
 
-    public setValues(username: string, password: string) {
-      this.username = username;
-      this.password = password;
-    }
+    // authorizationData = "Basic " + btoa(this.username + ":" + this.password);
+    authorizationData = "Basic " + btoa("desktop" + ":" + "test");
+
+     headerOptions = {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json",
+        Authorization: this.authorizationData,
+      }),
+    };
 
     getUsers(): Observable<User[]> {
+      console.log(this.username);
         return this.httpClient.get<User[]>('http://localhost:62292/api/Users', this.headerOptions);
     }
 
     getUser(id :number): Observable<User> {
+      if(this.username && this.password) {
+        this.headerOptions = {
+          headers: new HttpHeaders({
+            "Content-Type": "application/json",
+             Authorization: "Basic " + btoa(this.username + ":" + this.password)
+          })
+        };
+      }
       return this.httpClient.get<User>(`${this.rootURL}/${id}`,this.headerOptions);
     }
 
