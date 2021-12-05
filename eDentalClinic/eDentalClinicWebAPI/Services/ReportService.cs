@@ -17,22 +17,10 @@ namespace eDentalClinicWebAPI.Services
         }
         public List<BestSellingTreatment> GetBestSellingTreatments(ReportSearchRequest request)
         {
-
-            var appointments = _context.Appointments.ToList();
-            int count = 0;
-            foreach (var item in appointments)
-            {
-                if (item.StartDate >= request.StartDate && item.EndDate <= request.EndDate)
-                {
-                    count++;
-                }
-            }
-
-
             return (from t in _context.Treatments
                     join a in _context.Appointments
                     on t.TreatmentID equals a.TreatmentID
-                    where a.StartDate >= request.StartDate && a.EndDate <= request.EndDate
+                    where a.StartDate.Date >= request.StartDate && a.EndDate.Date <= request.EndDate
                     group t by t.Name into g
                     select new BestSellingTreatment
                     {
@@ -44,15 +32,10 @@ namespace eDentalClinicWebAPI.Services
 
         public List<BusinessReportDentist> GetBusinessReportDentists(ReportSearchRequest request)
         {
-
-           
-
-
-
             return (from d in _context.Dentists
                         join a in _context.Appointments
                         on d.DentistID equals a.DentistID
-                        where a.StartDate >= request.StartDate && a.EndDate <= request.EndDate
+                        where a.StartDate.Date >= request.StartDate && a.EndDate.Date <= request.EndDate
                         group d by d.FirstName + " " + d.LastName into g
                                     select new BusinessReportDentist
                                     {
