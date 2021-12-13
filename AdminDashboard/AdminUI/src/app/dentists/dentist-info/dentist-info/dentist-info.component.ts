@@ -209,19 +209,6 @@ export class DentistInfoComponent implements OnInit {
           }
         );
     }
-
-    // console.log(`First name: ${fileData.get("firstName")}`);
-    // console.log(`Last name: ${fileData.get("lastName")}`);
-    // console.log(`Email: ${fileData.get("email")}`);
-    // console.log(`Address: ${fileData.get("address")}`);
-    // console.log(`Phone: ${fileData.get("phone")}`);
-    // console.log(`DentalClinicID: ${fileData.get("dentalClinicID")}`);
-    // console.log(`BranchID: ${fileData.get("branchID")}`);
-    // console.log(`Description: ${fileData.get("description")}`);
-    // console.log(`BirthDate: ${fileData.get("birthDate")}`);
-    // console.log(`Active: ${fileData.get("active")}`);
-    // // console.log(`Image: ${fileData.get("image")}`);
-    // console.log(fileData.get("image"));
   }
 
   updateRecord(form: NgForm) {
@@ -268,5 +255,11 @@ export class DentistInfoComponent implements OnInit {
           }
         );
     }
+  }
+
+  delete(dentistID: number) {
+    this._dentistService.deleteDentist(dentistID).subscribe(res => console.log(res), err => console.log(err), () => {
+      this.router.navigate(["/home/all-dentists"])
+    });
   }
 }

@@ -67,4 +67,8 @@ export class DentistService {
     }), params: params});
   }
 
+  deleteDentist(id: number) {
+    return this.httpClient.delete(`${this.rootURL}/${id}`,this.headerOptions);
+  }
+
 }

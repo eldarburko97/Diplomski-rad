@@ -21,6 +21,9 @@ export class AllDentistsComponent implements OnInit {
   constructor(private _dentistService: DentistService, public domSanitizer: DomSanitizer) {}
 
   ngOnInit() {
+    const elements = document.getElementsByClassName("modal-backdrop");
+    while (elements.length > 0) elements[0].remove();
+
     this._dentistService.getDentists().subscribe(
       (dentistsData) => (this.collection = dentistsData),
       (error) => {
