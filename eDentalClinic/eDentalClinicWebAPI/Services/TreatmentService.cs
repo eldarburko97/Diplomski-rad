@@ -4,12 +4,13 @@ using eDentalClinic.Model.Requests;
 using eDentalClinicWebAPI.Database;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace eDentalClinicWebAPI.Services
 {
-    public class TreatmentService : CRUDService<eDentalClinic.Model.Treatment, TreatmentSearchRequest, Database.Treatment, TreatmentInsertRequest, TreatmentInsertRequest>
+    public class TreatmentService : CRUDService<eDentalClinic.Model.Treatment, TreatmentSearchRequest, Database.Treatment, TreatmentAddDTO, TreatmentAddDTO>
     {
         private eDentalClinicContext _context;
         private IMapper _mapper;
@@ -40,6 +41,31 @@ namespace eDentalClinicWebAPI.Services
 
             query = query.OrderBy(w => w.Price);
             return _mapper.Map<List<eDentalClinic.Model.Treatment>>(query.ToList());
+        }
+
+        public override eDentalClinic.Model.Treatment Insert(eDentalClinic.Model.TreatmentAddDTO treatment)
+        {
+            var entity = new eDentalClinicWebAPI.Database.Treatment
+            {
+                Name = treatment.Name,
+                Price = treatment.Price,
+                TimeRequired = treatment.TimeRequired
+            };
+
+            if (treatment.Image.Length > 0)
+            {
+                using (var ms = new MemoryStream())
+                {
+                    treatment.Image.CopyTo(ms);
+                    var fileBytes = ms.ToArray();
+                    entity.Image = fileBytes;
+                    //string s = Convert.ToBase64String(fileBytes);
+                }
+            }
+
+            _context.Treatments.Add(entity);
+            _context.SaveChanges();
+            return _mapper.Map<eDentalClinic.Model.Treatment>(entity);
         }
     }
 }

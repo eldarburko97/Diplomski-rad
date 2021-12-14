@@ -13,9 +13,9 @@ namespace eDentalClinicWebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class TreatmentsController : BaseCRUDController<Treatment, TreatmentSearchRequest, TreatmentInsertRequest, TreatmentInsertRequest>
+    public class TreatmentsController : BaseCRUDController<Treatment, TreatmentSearchRequest, TreatmentAddDTO, TreatmentAddDTO>
     {
-        public TreatmentsController(ICRUDService<Treatment, TreatmentSearchRequest, TreatmentInsertRequest, TreatmentInsertRequest> service, IMapper mapper) : base(service, mapper)
+        public TreatmentsController(ICRUDService<Treatment, TreatmentSearchRequest, TreatmentAddDTO, TreatmentAddDTO> service, IMapper mapper) : base(service, mapper)
         {
 
         }

@@ -126,12 +126,13 @@ export class TreatmentInfoComponent implements OnInit {
 
       if (this.img) {
         newTreatment.image = this.img;
+        console.log(newTreatment.image);
         fileData.append("image", newTreatment.image);
         this.http.post("http://localhost:62292/api/Treatments/insert", fileData).subscribe(
           (res) => console.log(res),
           (err) => console.log(err),
           () => {
-            this.router.navigate(["/home/all-dentists"]);
+            this.router.navigate(["/home/all-treatments"]);
           }
         );
       } else {

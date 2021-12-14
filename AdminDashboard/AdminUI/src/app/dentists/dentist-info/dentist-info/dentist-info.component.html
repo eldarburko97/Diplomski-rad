@@ -83,7 +83,7 @@
         </div>
       </div>
 
-      <div *ngIf="dentist.dentistID!=0; else elseBlock2">
+      <div *ngIf="dentist.dentistID>0; else elseBlock2">
         <div class="form-row">
           <div class="form-group col-md-6">
             <button type="submit" class="btn btn-primary form-control">Save</button>

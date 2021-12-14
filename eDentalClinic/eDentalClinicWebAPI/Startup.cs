@@ -56,7 +56,7 @@ namespace eDentalClinicWebAPI
             services.AddScoped<IRecommendationService, RecommendationService>();
             services.AddScoped<ICRUDService<eDentalClinic.Model.Branch, BranchSearchRequest, BranchInsertRequest, BranchInsertRequest>, BranchService>();
             services.AddScoped<ICRUDService<eDentalClinic.Model.Dentist, DentistSearchRequest, eDentalClinic.Model.DentistAddDTO, eDentalClinic.Model.DentistAddDTO>, DentistService>();
-            services.AddScoped<ICRUDService<eDentalClinic.Model.Treatment, TreatmentSearchRequest, TreatmentInsertRequest, TreatmentInsertRequest>, TreatmentService>();
+            services.AddScoped<ICRUDService<eDentalClinic.Model.Treatment, TreatmentSearchRequest, eDentalClinic.Model.TreatmentAddDTO, eDentalClinic.Model.TreatmentAddDTO>, TreatmentService>();
             services.AddScoped<ICRUDService<eDentalClinic.Model.BranchTreatment, BranchTreatmentSearchRequest, BranchTreatmentInsertRequest, BranchTreatmentInsertRequest>, BranchTreatmentService>();
             services.AddScoped<ICRUDService<eDentalClinic.Model.City, CitySearchRequest, CityInsertRequest, CityInsertRequest>, CityService>();
             services.AddScoped<ICRUDService<eDentalClinic.Model.Gender, GenderSearchRequest, GenderInsertRequest, GenderInsertRequest>, GenderService>();

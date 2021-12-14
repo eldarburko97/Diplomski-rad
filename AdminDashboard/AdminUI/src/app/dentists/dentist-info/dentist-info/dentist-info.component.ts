@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from "@angular/core";
+import { Component, Input, OnInit, ViewChild } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { formatDate } from "@angular/common";
 import { Dentist } from "src/app/models/dentist.model";
@@ -37,6 +37,7 @@ export class DentistInfoComponent implements OnInit {
   defaultImage: File;
   url: any;
   birth: Date = new Date();
+  @ViewChild('form') public createDentistForm: NgForm;
   constructor(
     private route: ActivatedRoute,
     private _dentistService: DentistService,
@@ -55,7 +56,7 @@ export class DentistInfoComponent implements OnInit {
   }
 
   ngOnInit() {
-    // Mora stajati ovo prvo
+
     this.dentist = {
       dentistID: 0,
       dentalClinicID: 0,
@@ -74,6 +75,8 @@ export class DentistInfoComponent implements OnInit {
     if (this.route.snapshot.paramMap.get("dentistID")) {
       this.route.paramMap.subscribe((paramMap) => {
         this.id = parseInt(paramMap.get("dentistID"));
+        console.log(this.id);
+        console.log(this.dentist.dentistID);
       });
       this._dentistService.getDentist(this.id).subscribe(
         (dentistData) => {
@@ -111,6 +114,7 @@ export class DentistInfoComponent implements OnInit {
         active: false,
         // branch: new Branch(),
       };
+      console.log(this.dentist.dentistID);
     }
   }
 
@@ -159,93 +163,89 @@ export class DentistInfoComponent implements OnInit {
   }
 
   insertRecord(form: NgForm) {
-    const newDentist: Dentist = Object.assign({}, this.dentist);
-    const fileData = new FormData();
-    fileData.append("firstName", newDentist.firstName);
-    fileData.append("lastName", newDentist.lastName);
-    fileData.append("email", newDentist.email);
-    fileData.append("address", newDentist.address);
-    fileData.append("phone", newDentist.phone);
-    fileData.append("dentalClinicID", "1");
-    fileData.append("branchID", newDentist.branchID.toString());
-    fileData.append("description", newDentist.description);
-    fileData.append(
-      "birthDate",
-      this.datepipe.transform(newDentist.birthDate, "yyyy-MM-dd")
-    );
-    fileData.append("active", newDentist.active.toString());
-
-    if (this.img) {
-      newDentist.image = this.img;
-      fileData.append("image", newDentist.image);
-      this.http.post("http://localhost:62292/api/Dentists/insert", fileData).subscribe(
-        (res) => console.log(res),
-        (err) => console.log(this.err),
-        () => {
-          this.router.navigate(["/home/all-dentists"]);
-        }
-      );
+    if(this.createDentistForm.invalid) {
+      this.ngOnInit();
     } else {
-      this.http
-        .get("./assets/images/userDefault.png", { responseType: "blob" })
-        .subscribe(
-          (res) => {
-            this.defaultImage = new File([res], "userDefault.png");
-            fileData.append("image", this.defaultImage);
-          },
-          (err) => console.log(err),
+      const newDentist: Dentist = Object.assign({}, this.dentist);
+      const fileData = new FormData();
+      fileData.append("firstName", newDentist.firstName);
+      fileData.append("lastName", newDentist.lastName);
+      fileData.append("email", newDentist.email);
+      fileData.append("address", newDentist.address);
+      fileData.append("phone", newDentist.phone);
+      fileData.append("dentalClinicID", "1");
+      fileData.append("branchID", newDentist.branchID.toString());
+      fileData.append("description", newDentist.description);
+      fileData.append(
+        "birthDate",
+        this.datepipe.transform(newDentist.birthDate, "yyyy-MM-dd")
+      );
+      fileData.append("active", newDentist.active.toString());
+
+      if (this.img) {
+        newDentist.image = this.img;
+        fileData.append("image", newDentist.image);
+        this.http.post("http://localhost:62292/api/Dentists/insert", fileData).subscribe(
+          (res) => console.log(res),
+          (err) => console.log(this.err),
           () => {
-            // console.log(fileData.get("image"));
-            // this.http.post('http://localhost:62292/api/values', fileData).subscribe(res => console.log(res));
-            this.http
-              .post("http://localhost:62292/api/Dentists/insert", fileData)
-              .subscribe(
-                (res) => console.log(res),
-                (err) => console.log(this.err),
-                () => {
-                  this.router.navigate(["/home/all-dentists"]);
-                }
-              );
+            this.router.navigate(["/home/all-dentists"]);
           }
         );
+      } else {
+        this.http
+          .get("./assets/images/userDefault.png", { responseType: "blob" })
+          .subscribe(
+            (res) => {
+              this.defaultImage = new File([res], "userDefault.png");
+              fileData.append("image", this.defaultImage);
+            },
+            (err) => console.log(err),
+            () => {
+              // console.log(fileData.get("image"));
+              // this.http.post('http://localhost:62292/api/values', fileData).subscribe(res => console.log(res));
+              this.http
+                .post("http://localhost:62292/api/Dentists/insert", fileData)
+                .subscribe(
+                  (res) => console.log(res),
+                  (err) => console.log(this.err),
+                  () => {
+                    this.router.navigate(["/home/all-dentists"]);
+                  }
+                );
+            }
+          );
+      }
     }
+
   }
 
   updateRecord(form: NgForm) {
-    const updatedDentist: Dentist = Object.assign({}, this.dentist);
-    console.log(updatedDentist);
-    const fileData = new FormData();
-    fileData.append("dentistID", updatedDentist.dentistID.toString());
-    fileData.append("firstName", updatedDentist.firstName);
-    fileData.append("lastName", updatedDentist.lastName);
-    fileData.append("email", updatedDentist.email);
-    fileData.append("address", updatedDentist.address);
-    fileData.append("phone", updatedDentist.phone);
-    fileData.append("dentalClinicID", "1");
-    fileData.append("branchID", updatedDentist.branchID.toString());
-    fileData.append("description", updatedDentist.description);
-    fileData.append(
-      "birthDate",
-      this.datepipe.transform(updatedDentist.birthDate, "yyyy-MM-dd")
-    );
-    fileData.append("active", updatedDentist.active.toString());
-    if (this.img) {
-      updatedDentist.image = this.img;
-      fileData.append("image", updatedDentist.image);
-      // console.log(updatedDentist.image);
-      this.http
-      .put("http://localhost:62292/api/Dentists/" + updatedDentist.dentistID, fileData)
-      .subscribe(
-        (res) => console.log(res),
-        (err) => console.log(this.err),
-        () => {
-          this.router.navigate(["/home/all-dentists"]);
-        }
+    if(this.createDentistForm.invalid) {
+      this.ngOnInit();
+    } else {
+      const updatedDentist: Dentist = Object.assign({}, this.dentist);
+      console.log(updatedDentist);
+      const fileData = new FormData();
+      fileData.append("dentistID", updatedDentist.dentistID.toString());
+      fileData.append("firstName", updatedDentist.firstName);
+      fileData.append("lastName", updatedDentist.lastName);
+      fileData.append("email", updatedDentist.email);
+      fileData.append("address", updatedDentist.address);
+      fileData.append("phone", updatedDentist.phone);
+      fileData.append("dentalClinicID", "1");
+      fileData.append("branchID", updatedDentist.branchID.toString());
+      fileData.append("description", updatedDentist.description);
+      fileData.append(
+        "birthDate",
+        this.datepipe.transform(updatedDentist.birthDate, "yyyy-MM-dd")
       );
-      fileData.append("image", updatedDentist.image);
-       } else {
-      updatedDentist.image = this.dentistImage;
-      this.http
+      fileData.append("active", updatedDentist.active.toString());
+      if (this.img) {
+        updatedDentist.image = this.img;
+        fileData.append("image", updatedDentist.image);
+        // console.log(updatedDentist.image);
+        this.http
         .put("http://localhost:62292/api/Dentists/" + updatedDentist.dentistID, fileData)
         .subscribe(
           (res) => console.log(res),
@@ -254,6 +254,19 @@ export class DentistInfoComponent implements OnInit {
             this.router.navigate(["/home/all-dentists"]);
           }
         );
+        fileData.append("image", updatedDentist.image);
+         } else {
+        updatedDentist.image = this.dentistImage;
+        this.http
+          .put("http://localhost:62292/api/Dentists/" + updatedDentist.dentistID, fileData)
+          .subscribe(
+            (res) => console.log(res),
+            (err) => console.log(this.err),
+            () => {
+              this.router.navigate(["/home/all-dentists"]);
+            }
+          );
+      }
     }
   }
 
